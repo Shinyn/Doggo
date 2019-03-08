@@ -4,46 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccountActivity">
+    tools:context=".CreateAccountActivity"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/imageView2"
+        android:contentDescription="@string/content_description_paw"
         android:layout_width="285dp"
         android:layout_height="350dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/newUsernameButton"
+        app:layout_constraintBottom_toTopOf="@+id/newUsernameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/real_paw" />
 
     <EditText
-        android:id="@+id/newUsernameButton"
+        android:id="@+id/newUsernameText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Username..."
+        android:hint="@string/username"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/newPasswordButton"
+        app:layout_constraintBottom_toTopOf="@+id/newPasswordText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/newPasswordButton"
+        android:id="@+id/newPasswordText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Password..."
+        android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/repeatPasswordButton"
+        app:layout_constraintBottom_toTopOf="@+id/repeatPasswordText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/repeatPasswordButton"
+        android:id="@+id/repeatPasswordText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -52,19 +54,19 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
-        android:hint="Repeat password..."
+        android:hint="@string/repeat_password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/confirmAccountButton"
+        app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/confirmAccountButton"
+        android:id="@+id/createAccountButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/confirm_button_color"
-        android:text="Confirm"
+        android:text="@string/create_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

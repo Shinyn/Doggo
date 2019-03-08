@@ -5,12 +5,11 @@
     <string name="login">Login</string>
     <string name="adverts">Adverts</string>
     <string name="create_account">Create Account</string>
-    <string name="username">Username...</string>
-    <string name="password">Password...</string>
-    <string name="repeat_password">Repeat password...</string>
+    <string name="username">Username..</string>
+    <string name="password">Password..</string>
+    <string name="repeat_password">Repeat password..</string>
     <string name="confirm">Confirm</string>
-
-
+    <string name="content_description_paw">Dog paw</string>
 
 
 </resources>
