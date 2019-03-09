@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        // Byter vy till "login"
         intent = new Intent(this, LoginActivity.class);
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // byter vy till "skapa konto"
         intent2 = new Intent(this, CreateAccountActivity.class);
         Button createAccountButton = findViewById(R.id.createAccountButton);
         createAccountButton.setOnClickListener(new View.OnClickListener() {

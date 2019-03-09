@@ -1,7 +1,16 @@
 package com.l.doggo;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,7 +22,24 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    LocationManager locationManager;
+    LocationListener locationListener;
     private GoogleMap mMap;
+
+
+    //Om vi har tillstånd till platsdata så ber vi om gps uppdateringar
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +49,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
 
@@ -39,10 +67,60 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng stockholm = new LatLng(59.330909, 18.057494);
 
-        mMap.addMarker(new MarkerOptions().position(stockholm).title("Stockholm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stockholm, 12));
+
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                // Map typ = hybrid
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+                // Sätter en lila markering vid användarens position och flyttar kameran dit
+
+                LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+
+                // Kartan zoomar in (1 - 20) 1 = ser hela världen, 20 = ser gator på nära håll
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+
+        // Om tillstånd att använda gps inte finns så fråga om tillstånd, annars hämta platsdata
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+        } else {
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+            // Sätter en lila markering vid användarens position och flyttar kameran dit
+            LatLng myLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+            mMap.clear();
+            mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+
+            // Kartan zoomar in (1 - 20) 1 = ser hela världen, 20 = ser gator på nära håll
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
+        }
     }
 }
