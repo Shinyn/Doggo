@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
     Intent intent2;
-    Intent intent3;
+    //Intent intent3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

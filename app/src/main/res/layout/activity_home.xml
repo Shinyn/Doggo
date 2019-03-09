@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:text="Map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addButtonHome" />
+
+    <Button
+        android:id="@+id/addButtonHome"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:text="Advert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/messagesButtonHome" />
+
+    <Button
+        android:id="@+id/messagesButtonHome"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:text="Messages"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add_photo" />
 </android.support.constraint.ConstraintLayout>
