@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                // Uppdaterar kartan var 10e sekund eller var 10e meter
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
             }
         }
@@ -79,7 +80,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Sätter en lila markering vid användarens position och flyttar kameran dit
 
                 LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                // Tar bort markeringar från kartan
                 mMap.clear();
+                // Lägger till en ny lila markering på användarens nuvarande plats
                 mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
                 // Kartan zoomar in (1 - 20) 1 = ser hela världen, 20 = ser gator på nära håll
@@ -110,8 +113,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         } else {
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            // Uppdaterar positionen var 10e sekund eller var 10e meter
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
+            // Hämtar senast kända position
             Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            // Gör kartan till en hybrid mellan satellit och vanlig karta
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
             // Sätter en lila markering vid användarens position och flyttar kameran dit
