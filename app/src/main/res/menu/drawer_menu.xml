@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:title="Pets"
+        android:icon="@drawable/ic_pets_black_24dp"
+        >
+    </item>
+
+    <item
+        android:title="Add pet"
+        android:icon="@drawable/ic_add_black_24dp"
+        >
+    </item>
+
+    <item
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        >
+    </item>
+
+    <item
+        android:title="Sign out"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        >
+    </item>
+
+</menu>
