@@ -36,7 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 // Uppdaterar kartan var 10e sekund eller var 10e meter
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 24000, 10, locationListener);
             }
         }
     }
@@ -86,7 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
                 // Kartan zoomar in (1 - 20) 1 = ser hela världen, 20 = ser gator på nära håll
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14));
             }
 
             @Override
@@ -114,7 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
 
             // Uppdaterar positionen var 10e sekund eller var 10e meter
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 24000, 10, locationListener);
             // Hämtar senast kända position
             Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             // Gör kartan till en hybrid mellan satellit och vanlig karta
@@ -126,7 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
             // Kartan zoomar in (1 - 20) 1 = ser hela världen, 20 = ser gator på nära håll
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14));
         }
     }
 }
