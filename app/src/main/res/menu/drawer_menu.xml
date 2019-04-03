@@ -6,28 +6,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/petsMenu"
+            android:id="@+id/nav_petsMenu"
             android:icon="@drawable/ic_pets_black_24dp"
             android:title="Pets" />
 
         <item
-            android:id="@+id/addPetMenu"
+            android:id="@+id/nav_addPetMenu"
             android:icon="@drawable/ic_add_black_24dp"
             android:title="Add pet" />
 
         <item
-            android:id="@+id/profileMenu"
+            android:id="@+id/nav_profileMenu"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Profile" />
 
         <item
-            android:id="@+id/settingsMenu"
+            android:id="@+id/nav_settingsMenu"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Settings" />
     </group>
 
     <item
-        android:id="@+id/signOutMenu"
+        android:id="@+id/nav_signOutMenu"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="Sign out" />
 

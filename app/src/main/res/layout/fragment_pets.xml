@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/green4">
 
     <TextView
         android:id="@+id/petNameDisplay"
@@ -13,6 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:hint="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,35 +25,62 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:hint="Breed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/petNameDisplay" />
 
     <TextView
+        android:id="@+id/dogAgeDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="mail"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="138dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/breedDisplay" />
 
     <TextView
+        android:id="@+id/dogHeightDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="mail"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="138dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dogAgeDisplay" />
 
     <TextView
+        android:id="@+id/dogWeightDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="mail"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="138dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Weight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dogHeightDisplay" />
 
     <TextView
+        android:id="@+id/neuteredDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="mail"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="138dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:hint="Neutered"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dogWeightDisplay" />
+
+    <TextView
+        android:id="@+id/dogGenderDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Gender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neuteredDisplay" />
 
 </android.support.constraint.ConstraintLayout>
