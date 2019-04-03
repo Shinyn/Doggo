@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Behöver lägga till annonsknappen (när den view'n är klar)
 
     }
 }

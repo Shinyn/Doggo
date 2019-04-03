@@ -11,6 +11,10 @@
     <string name="repeat_password">Repetera lösenord..</string>
     <string name="confirm">Bekräfta</string>
     <string name="content_description_paw">Hund tass</string>
+    <string name="title_activity_maps">Karta</string>
+
+    <string name="nav_open">Navigation öppen</string>
+    <string name="nav_closed">Navigation stängd</string>
 
 
 

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Permanents -->
     <string name="app_name">Doggo</string>
@@ -11,6 +11,9 @@
     <string name="confirm">Confirm</string>
     <string name="content_description_paw">Dog paw</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="nav_open">Navigation open</string>
+    <string name="nav_closed">Navigation closed</string>
 
 
 </resources>
