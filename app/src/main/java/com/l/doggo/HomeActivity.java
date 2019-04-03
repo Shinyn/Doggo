@@ -29,12 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.nav_open, R.string.nav_closed);
-        //drawerLayout.addDrawerListener(toggle);
-        /*toggle.syncState();*/
-
-
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(
@@ -47,6 +41,14 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.nav_open, R.string.nav_closed);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
 
         // Öppnar kartan
         intent = new Intent(this, MapsActivity.class);
