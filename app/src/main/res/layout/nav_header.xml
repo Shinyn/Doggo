@@ -9,7 +9,7 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical">
-    
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="placeHolder_userName"
+        android:text="DogLover#1"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
 
@@ -29,8 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="placeHolder_mail"
+        android:text="john.doe@gmail.com"
         android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
+        android:paddingBottom="4dp"/>
 </LinearLayout>
