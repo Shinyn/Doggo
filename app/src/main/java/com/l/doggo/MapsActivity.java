@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -41,8 +42,8 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                // Uppdaterar kartan var 10e sekund eller var 10e meter
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 24000, 10, locationListener);
+                // Uppdaterar kartan var 4e minut eller var 10e meter
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 240000, 10, locationListener);
             }
         }
     }
@@ -75,7 +76,6 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
 
-
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -89,7 +89,8 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
                 // Tar bort markeringar från kartan
                 mMap.clear();
                 // Lägger till en ny lila markering på användarens nuvarande plats
-                mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                mMap.addMarker(new MarkerOptions().position(myLocation).title("Your Location")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
                 // Kartan zoomar in (1 - 20) 1 = ser hela världen, 20 = ser gator på nära håll
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14));
@@ -119,8 +120,12 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
         } else {
 
-            // Uppdaterar positionen var 10e sekund eller var 10e meter
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 24000, 10, locationListener);
+            //CameraUpdate cameraUpdate = ;
+            //mMap.animateCamera(cameraUpdate);
+
+
+            // Uppdaterar positionen var 4e minut eller var 10e meter
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 240000, 10, locationListener);
             // Hämtar senast kända position
             Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             // Gör kartan till en hybrid mellan satellit och vanlig karta

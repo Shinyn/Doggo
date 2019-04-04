@@ -62,6 +62,7 @@
 
     <Button
         android:id="@+id/createAccountButton"
+        android:onClick="createAccount"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

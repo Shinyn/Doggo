@@ -34,7 +34,6 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new MapsActivity()).commit();
 
 
-
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(
@@ -43,14 +42,22 @@ public class HomeActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         switch (menuItem.getItemId()) {
+                            case R.id.nav_mapMenu:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
+                                break;
                             case R.id.nav_petsMenu:
                                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PetsFragment()).commit();
+                                break;
+                            case R.id.nav_addPetMenu:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddPetFragment()).commit();
+                                break;
+                            case R.id.nav_profileMenu:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                                break;
+                            case R.id.nav_signOutMenu:
+                                // Logga ut
                         }
-
-
-
                         drawerLayout.closeDrawers();
-
                         return true;
                     }
                 });
@@ -60,8 +67,6 @@ public class HomeActivity extends AppCompatActivity {
                 R.string.nav_open, R.string.nav_closed);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-
     }
 
     @Override
