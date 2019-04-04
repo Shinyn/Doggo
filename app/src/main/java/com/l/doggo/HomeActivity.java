@@ -31,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new MapsActivity()).commit();
+
 
 
         drawerLayout = findViewById(R.id.drawer);
@@ -42,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         switch (menuItem.getItemId()) {
                             case R.id.nav_petsMenu:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessageFragment()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PetsFragment()).commit();
                         }
 
 
@@ -60,16 +62,6 @@ public class HomeActivity extends AppCompatActivity {
         toggle.syncState();
 
 
-
-        // Öppnar kartan
-        intent = new Intent(this, MapsActivity.class);
-        Button mapButton = findViewById(R.id.mapButton);
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
