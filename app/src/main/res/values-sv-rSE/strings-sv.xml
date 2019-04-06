@@ -6,7 +6,7 @@
     <string name="login">Logga in</string>
     <string name="adverts">Annonser</string>
     <string name="create_account">Skapa konto</string>
-    <string name="username">Användarnamn..</string>
+    <string name="email">Email..</string>
     <string name="password">Lösenord..</string>
     <string name="repeat_password">Repetera lösenord..</string>
     <string name="confirm">Bekräfta</string>

@@ -1,6 +1,5 @@
 package com.l.doggo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,63 +9,55 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import android.app.Fragment;
-import android.widget.Switch;
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class HomeActivity extends AppCompatActivity {
-
-    Intent intent;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new MapsActivity()).commit();
-
 
         drawerLayout = findViewById(R.id.drawer);
-        navigationView = findViewById(R.id.navView);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_mapMenu:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
-                                break;
-                            case R.id.nav_petsMenu:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PetsFragment()).commit();
-                                break;
-                            case R.id.nav_addPetMenu:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddPetFragment()).commit();
-                                break;
-                            case R.id.nav_profileMenu:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-                                break;
-                            case R.id.nav_signOutMenu:
-                                // Logga ut
-                        }
-                        drawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
+        NavigationView navigationView = findViewById(R.id.navView);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.nav_open, R.string.nav_closed);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
+            navigationView.setCheckedItem(R.id.nav_mapMenu);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_mapMenu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
+                break;
+            case R.id.nav_petsMenu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PetsFragment()).commit();
+                break;
+            case R.id.nav_addPetMenu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddPetFragment()).commit();
+                break;
+            case R.id.nav_profileMenu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                break;
+            case R.id.nav_signOutMenu:
+                // Logga ut
+        }
+        drawerLayout.closeDrawers();
+        return true;
     }
 
     @Override
