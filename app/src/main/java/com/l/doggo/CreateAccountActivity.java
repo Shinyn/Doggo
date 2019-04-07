@@ -55,6 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
 
+    // Creates a new account with email and password and on success go to homeActivity
     private void signIn(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -65,7 +66,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             startActivity(intent);
                             Toast.makeText(CreateAccountActivity.this, "YAY!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(CreateAccountActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAccountActivity.this, "You have to fill all fields correctly", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
