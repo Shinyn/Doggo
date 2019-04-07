@@ -30,8 +30,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     FirebaseFirestore db;
     private EditText emailView;
     private EditText passwordView;
-    private EditText repeatPasswordView;
-    UserAccount user;
 
 
     @Override
@@ -47,13 +45,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         // Editable fields
         emailView = findViewById(R.id.newEmail);
         passwordView = findViewById(R.id.newPassword);
-        repeatPasswordView = findViewById(R.id.repeatPassword);
-
-        user = new UserAccount();
-
-
     }
-
 
     // Creates a new account with email and password and on success go to homeActivity
     private void signIn(String email, String password) {
@@ -63,6 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             intent = new Intent(CreateAccountActivity.this, HomeActivity.class);
+                            intent.putExtra("email", emailView.toString());
                             startActivity(intent);
                             Toast.makeText(CreateAccountActivity.this, "YAY!", Toast.LENGTH_SHORT).show();
                         } else {
@@ -77,24 +70,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password = passwordView.getText().toString();
 
         signIn(email, password);
-    }
-
-
-
-    public void verifyLogin() {
-        if (passwordView == repeatPasswordView && emailView != null) {
-            // If all fields are filled correctly start next activity else error message
-            intent = new Intent(this, HomeActivity.class);
-            Button createAccountButton = findViewById(R.id.createAccountButton);
-            createAccountButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(intent);
-                }
-            });
-
-        } else {
-            Toast.makeText(this, "You have to fill all fields correctly", Toast.LENGTH_SHORT).show();
-        }
     }
 }

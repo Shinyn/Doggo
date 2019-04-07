@@ -9,10 +9,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    TextView emailHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
             navigationView.setCheckedItem(R.id.nav_mapMenu);
         }
+
+        // Krashar allt..
+        String daMail = getIntent().getStringExtra("email");
+        emailHeader = findViewById(R.id.email_nav_header);
+        //emailHeader.setText("asd");
     }
 
     @Override

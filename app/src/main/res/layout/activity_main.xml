@@ -33,30 +33,15 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/basic_button_one"
         android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/annonsButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/annonsButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/basic_button_two"
-        android:text="@string/adverts"
         app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
         android:id="@+id/createAccountButton"
-        android:background="@drawable/basic_button_three"
+        android:background="@drawable/basic_button_two"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
