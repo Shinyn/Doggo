@@ -1,6 +1,11 @@
 package com.l.doggo;
 
-public class Dog {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Dog implements Serializable {
+
+    private ArrayList<Dog> dogArrayList = new ArrayList<>();
 
     private String name;
     private String breed;
@@ -18,6 +23,10 @@ public class Dog {
         this.weight = weight;
         this.neutered = neutered;
         this.male = male;
+    }
+
+    public void addDogtoArrayList(Dog dog) {
+        dogArrayList.add(dog);
     }
 
     public String getName() {

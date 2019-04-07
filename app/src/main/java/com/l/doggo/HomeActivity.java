@@ -11,16 +11,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     TextView emailHeader;
+    private FirebaseAuth mAuth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,9 +45,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_mapMenu);
         }
 
+        //
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        String navEmail = findViewById(R.id.nav_header_email).toString();
+        String email = user.getEmail();
+        // navemail set text email borde fungera?
+
         // Krashar allt..
-        String daMail = getIntent().getStringExtra("email");
-        emailHeader = findViewById(R.id.email_nav_header);
+        //String daMail = getIntent().getStringExtra("email");
+        //emailHeader = findViewById(R.id.nav_header_email);
         //emailHeader.setText("asd");
     }
 
@@ -61,7 +74,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
             case R.id.nav_signOutMenu:
-                // Logga ut
+                logout();
         }
         drawerLayout.closeDrawers();
         return true;
@@ -74,5 +87,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void logout() {
+
     }
 }

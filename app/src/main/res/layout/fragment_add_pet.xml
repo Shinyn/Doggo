@@ -4,11 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/green1">
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/addDogPicture"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/petName"
+        android:id="@+id/dogName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -16,10 +24,10 @@
         android:layout_marginTop="8dp"
         android:hint="Pets name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/addDogPicture" />
 
     <EditText
-        android:id="@+id/breed"
+        android:id="@+id/dogBreed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,7 +35,7 @@
         android:layout_marginTop="8dp"
         android:hint="Breed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petName" />
+        app:layout_constraintTop_toBottomOf="@+id/dogName" />
 
     <EditText
         android:id="@+id/dogAge"
@@ -38,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:hint="Age"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/breed" />
+        app:layout_constraintTop_toBottomOf="@+id/dogBreed" />
 
     <EditText
         android:id="@+id/dogHeight"
@@ -63,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dogHeight" />
 
     <EditText
-        android:id="@+id/neutered"
+        android:id="@+id/dogNeutered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -81,6 +89,17 @@
         android:layout_marginTop="8dp"
         android:hint="Gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/neutered" />
+        app:layout_constraintTop_toBottomOf="@+id/dogNeutered" />
+
+    <Button
+        android:id="@+id/createDogBtn"
+        android:onClick="createDog"
+        android:text="Create Dog"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
