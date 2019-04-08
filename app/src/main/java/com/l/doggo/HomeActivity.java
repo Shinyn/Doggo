@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,8 +49,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String navEmail = findViewById(R.id.nav_header_email).toString();
-        String email = user.getEmail();
+        //String navEmail = findViewById(R.id.nav_header_email).toString();
+        //String email = user.getEmail();
+
         // navemail set text email borde fungera?
 
         // Krashar allt..
@@ -90,6 +92,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void logout() {
-
+        // Sätter man onclick i drawer_menu xml:en så krashar appen när man skapar konto eller loggar in
+        // Kanske funkar om man gör en onClickListener?
+        Toast.makeText(this, "logout method called", Toast.LENGTH_SHORT).show();
     }
 }

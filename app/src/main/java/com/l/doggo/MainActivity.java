@@ -22,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // if user is signed in -> go to HomeActivity
+        // Crashar pga nullPointerException
+        /*
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             intent3 = new Intent(this, HomeActivity.class);
             startActivity(intent);
-        }
+        } */
 
 
         // Byter vy till "login"
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
+
+
 }

@@ -39,6 +39,7 @@
 
     <EditText
         android:id="@+id/dogAge"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -50,6 +51,7 @@
 
     <EditText
         android:id="@+id/dogHeight"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -61,6 +63,7 @@
 
     <EditText
         android:id="@+id/dogWeight"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -93,7 +96,6 @@
 
     <Button
         android:id="@+id/createDogBtn"
-        android:onClick="createDog"
         android:text="Create Dog"
         android:textColor="@color/white"
         android:background="@color/colorPrimary"

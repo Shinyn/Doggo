@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
+/*
 public class MyAdapter extends ArrayAdapter {
 
     private Dog dog;
@@ -25,3 +25,4 @@ public class MyAdapter extends ArrayAdapter {
         return super.getView(position, convertView, parent);
     }
 }
+*/
