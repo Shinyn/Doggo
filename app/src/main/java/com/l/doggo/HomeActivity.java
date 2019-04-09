@@ -1,5 +1,6 @@
 package com.l.doggo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,7 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     TextView emailHeader;
     private FirebaseAuth mAuth;
     FirebaseUser user;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
+        intent = new Intent(this, MainActivity.class);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -48,16 +53,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //
 
+        // Hämtar den inloggade användarens email och sätter TextViewn till den mailen.
         user = FirebaseAuth.getInstance().getCurrentUser();
-        //String navEmail = findViewById(R.id.nav_header_email).toString();
-        //String email = user.getEmail();
+        String email = user.getEmail();
 
-        // navemail set text email borde fungera?
+        View header = navigationView.getHeaderView(0);
+        TextView navEmail = header.findViewById(R.id.nav_header_email);
 
-        // Krashar allt..
-        //String daMail = getIntent().getStringExtra("email");
-        //emailHeader = findViewById(R.id.nav_header_email);
-        //emailHeader.setText("asd");
+        if (navEmail == null)
+            Log.d("!!!", "onCreate: view is null ");
+        else
+            navEmail.setText(email);
     }
 
     @Override
@@ -76,7 +82,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
             case R.id.nav_signOutMenu:
-                logout();
+                mAuth.signOut();
+                startActivity(intent);
         }
         drawerLayout.closeDrawers();
         return true;
@@ -86,14 +93,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+        } /*else {
             super.onBackPressed();
-        }
+        }*/
     }
 
-    public void logout() {
-        // Sätter man onclick i drawer_menu xml:en så krashar appen när man skapar konto eller loggar in
-        // Kanske funkar om man gör en onClickListener?
-        Toast.makeText(this, "logout method called", Toast.LENGTH_SHORT).show();
-    }
+
 }

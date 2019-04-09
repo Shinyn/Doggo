@@ -3,6 +3,7 @@ package com.l.doggo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,12 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
         // if user is signed in -> go to HomeActivity
         // Crashar pga nullPointerException
-        /*
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             intent3 = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-        } */
+            startActivity(intent3);
+        } else {
+            Log.d("!!!", "onCreate: no user");
+        }
 
 
         // Byter vy till "login"

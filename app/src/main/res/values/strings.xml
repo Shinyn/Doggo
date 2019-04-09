@@ -3,7 +3,6 @@
     <!-- Permanents -->
     <string name="app_name">Doggo</string>
     <string name="login">Login</string>
-    <string name="adverts">Adverts</string>
     <string name="create_account">Create Account</string>
     <string name="email">Email..</string>
     <string name="password">Password..</string>
@@ -14,6 +13,15 @@
 
     <string name="nav_open">Navigation open</string>
     <string name="nav_closed">Navigation closed</string>
+
+
+
+    <!-- Drawer menu -->
+    <string name="map_drawer">Map</string>
+    <string name="pets_drawer">My dogs</string>
+    <string name="add_pet_drawer">Add dog</string>
+    <string name="profile_drawer">Profile</string>
+    <string name="sign_out_drawer">Sign out</string>
 
 
 </resources>

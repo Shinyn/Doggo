@@ -41,6 +41,7 @@ public class AddPetFragment extends Fragment {
             }
         });
 
+        /*
         name = getView().findViewById(R.id.dogName);
         breed = getView().findViewById(R.id.dogBreed);
         age = getView().findViewById(R.id.dogAge);
@@ -48,6 +49,7 @@ public class AddPetFragment extends Fragment {
         weight = getView().findViewById(R.id.dogWeight);
         neutered = getView().findViewById(R.id.dogNeutered);
         gender = getView().findViewById(R.id.dogGender);
+        */
 
     }
 
@@ -80,6 +82,7 @@ public class AddPetFragment extends Fragment {
                 Boolean.parseBoolean(gender.getText().toString()));
         Toast.makeText(getActivity(), "Dog created", Toast.LENGTH_SHORT).show();
         // testDog ska in i Arrayen
+        // Ska
 
     }
 }
