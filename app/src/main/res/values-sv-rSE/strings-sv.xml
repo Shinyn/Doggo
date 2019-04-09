@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Permanenta -->
+    <!-- Login, Account, Appname -->
     <string name="app_name">Doggo</string>
     <string name="login">Logga in</string>
     <string name="create_account">Skapa konto</string>
@@ -9,13 +9,26 @@
     <string name="password">Lösenord..</string>
     <string name="repeat_password">Repetera lösenord..</string>
     <string name="confirm">Bekräfta</string>
-    <string name="content_description_paw">Hund tass</string>
     <string name="title_activity_maps">Karta</string>
 
+
+    <!-- AddPetFragment -->
+    <string name="add_pet_name">Namn</string>
+    <string name="add_pet_breed">Ras</string>
+    <string name="add_pet_age">Ålder</string>
+    <string name="add_pet_height">Mankhöjd</string>
+    <string name="add_pet_weight">Vikt</string>
+    <string name="add_pet_create_dog">Skapa Hund</string>
+    <string name="add_pet_neutered">Kastrerad</string>
+    <string name="add_pet_male">Hane</string>
+    <string name="add_pet_female">Hona</string>
+
+
+    <!-- För synskadade -->
+    <string name="content_description_paw">Hund tass</string>
     <string name="nav_open">Navigation öppen</string>
     <string name="nav_closed">Navigation stängd</string>
-
-
+    <string name="profile_image">Profilbild</string>
 
 
     <!-- Drawer menyn -->
@@ -24,12 +37,5 @@
     <string name="add_pet_drawer">Skapa hund</string>
     <string name="profile_drawer">Profil</string>
     <string name="sign_out_drawer">Logga ut</string>
-
-
-
-
-
-
-
 
 </resources>

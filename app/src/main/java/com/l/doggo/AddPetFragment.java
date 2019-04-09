@@ -41,6 +41,8 @@ public class AddPetFragment extends Fragment {
             }
         });
 
+        // if ArrayList of dogs is null then display message saying "you dont have any dogs yet"
+
         /*
         name = getView().findViewById(R.id.dogName);
         breed = getView().findViewById(R.id.dogBreed);
@@ -66,6 +68,7 @@ public class AddPetFragment extends Fragment {
 
 
     public void createDog() {
+        /*
         name = getView().findViewById(R.id.dogName);
         breed = getView().findViewById(R.id.dogBreed);
         age = getView().findViewById(R.id.dogAge);
@@ -73,6 +76,8 @@ public class AddPetFragment extends Fragment {
         weight = getView().findViewById(R.id.dogWeight);
         neutered = getView().findViewById(R.id.dogNeutered);
         gender = getView().findViewById(R.id.dogGender);
+        */
+
 
         Dog testDog = new Dog(name.toString(), breed.toString(),
                 Integer.parseInt(age.getText().toString()),
@@ -82,8 +87,13 @@ public class AddPetFragment extends Fragment {
                 Boolean.parseBoolean(gender.getText().toString()));
         Toast.makeText(getActivity(), "Dog created", Toast.LENGTH_SHORT).show();
         // testDog ska in i Arrayen
-        // Ska
+        // ersätt textfälten för boolean till radioknapp/i bokningsruta
+        // lägg till kg, cm och år/månad efter int'arna
 
+    }
+
+    public  void checkGender() {
+        // Kolla vilken checkBox som är ikryssad och sätter gender till den som är vald
     }
 }
 

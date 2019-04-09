@@ -64,6 +64,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Log.d("!!!", "onCreate: view is null ");
         else
             navEmail.setText(email);
+            // Sätt också beskrivning, mobNr och användarnamn vid inloggning (om det finns)
     }
 
     @Override
@@ -93,9 +94,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } /*else {
+        } else {
             super.onBackPressed();
-        }*/
+        }
     }
 
 

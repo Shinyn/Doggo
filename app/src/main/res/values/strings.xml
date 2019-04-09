@@ -8,12 +8,26 @@
     <string name="password">Password..</string>
     <string name="repeat_password">Repeat password..</string>
     <string name="confirm">Confirm</string>
-    <string name="content_description_paw">Dog paw</string>
     <string name="title_activity_maps">Map</string>
 
+
+    <!-- AddPetFragment -->
+    <string name="add_pet_name">Name</string>
+    <string name="add_pet_breed">Breed</string>
+    <string name="add_pet_age">Age</string>
+    <string name="add_pet_height">Withers Height</string>
+    <string name="add_pet_weight">Weight</string>
+    <string name="add_pet_create_dog">Create Dog</string>
+    <string name="add_pet_neutered">Neutered</string>
+    <string name="add_pet_male">Male</string>
+    <string name="add_pet_female">Female</string>
+
+
+    <!-- For the visually impaired -->
+    <string name="content_description_paw">Dog paw</string>
     <string name="nav_open">Navigation open</string>
     <string name="nav_closed">Navigation closed</string>
-
+    <string name="profile_image">Profile image</string>
 
 
     <!-- Drawer menu -->
@@ -22,6 +36,5 @@
     <string name="add_pet_drawer">Add dog</string>
     <string name="profile_drawer">Profile</string>
     <string name="sign_out_drawer">Sign out</string>
-
 
 </resources>
