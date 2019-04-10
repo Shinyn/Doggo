@@ -22,7 +22,7 @@ public class PetsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dog = (Dog) getActivity().getIntent().getSerializableExtra("updateDogList");
+        //dog = (Dog) getActivity().getIntent().getSerializableExtra("updateDogList");
 
 
     }

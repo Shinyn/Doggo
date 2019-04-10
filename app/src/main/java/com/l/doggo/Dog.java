@@ -25,7 +25,7 @@ public class Dog implements Serializable {
         this.male = male;
     }
 
-    public void addDogtoArrayList(Dog dog) {
+    public void addDogToArrayList(Dog dog) {
         dogArrayList.add(dog);
     }
 
