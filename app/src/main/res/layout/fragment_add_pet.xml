@@ -107,6 +107,7 @@
         <RadioButton
             android:id="@+id/radioBtnMale"
             android:text="@string/add_pet_male"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
