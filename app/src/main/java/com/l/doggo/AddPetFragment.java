@@ -60,9 +60,11 @@ public class AddPetFragment extends Fragment {
         /*KRASHAR JUST NU*/
         //-----------------
 
+        // Kollar vilken checkBox som är ikryssad och sätter gender till den som är vald
+        // Detta måste göras i onViewCreated som en onClickListener
 
         // Kollar hane eller hona -> ändra med setGender till true eller false
-        final int radioId = radioGroup.getCheckedRadioButtonId();
+        final int radioId = radioGroup.getCheckedRadioButtonId();  // Detta värde är null här = crash
         genderButton = getView().findViewById(radioId);
         genderButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,16 +181,4 @@ public class AddPetFragment extends Fragment {
         Toast.makeText(getActivity(), "Dog created", Toast.LENGTH_SHORT).show();
 
     }
-
-    public void checkGender(View view) {
-            int genderBtn = radioGroup.getCheckedRadioButtonId();
-            /*genderBtn = getView().findViewById(genderBtn); */
-
-        // Kolla vilken checkBox som är ikryssad och sätter gender till den som är vald
-        // Detta måste göras i onViewCreated som en onClickListener
-    }
-
 }
-
-
-//
