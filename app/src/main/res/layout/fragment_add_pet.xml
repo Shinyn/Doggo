@@ -107,14 +107,12 @@
         <RadioButton
             android:id="@+id/radioBtnMale"
             android:text="@string/add_pet_male"
-            android:onClick="checkGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <RadioButton
             android:id="@+id/radioBtnFemale"
             android:text="@string/add_pet_female"
-            android:onClick="checkGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

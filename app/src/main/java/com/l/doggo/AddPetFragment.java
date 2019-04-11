@@ -22,7 +22,7 @@ public class AddPetFragment extends Fragment {
     CheckBox checkBoxNeutered;
     RadioButton genderButton;
     boolean genderCheck = true;
-    boolean neuteredCheck;
+    boolean neuteredCheck = false;
 
     Intent intent;
     Button createDogBtn;
@@ -34,11 +34,13 @@ public class AddPetFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_add_pet, container, false);
 
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
 
         // Kollar om hunden är kastrerad eller ej
