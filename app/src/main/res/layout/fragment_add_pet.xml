@@ -120,4 +120,34 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/years_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/add_pet_year"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dogAge"
+        app:layout_constraintStart_toEndOf="@+id/dogAge" />
+
+    <TextView
+        android:id="@+id/withers_height_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/add_pet_cm"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dogHeight"
+        app:layout_constraintStart_toEndOf="@+id/dogHeight" />
+
+    <TextView
+        android:id="@+id/weight_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/add_pet_kg"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dogWeight"
+        app:layout_constraintStart_toEndOf="@+id/dogWeight" />
+
 </android.support.constraint.ConstraintLayout>

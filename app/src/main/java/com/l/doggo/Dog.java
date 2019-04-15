@@ -29,6 +29,10 @@ public class Dog implements Serializable {
         dogArrayList.add(dog);
     }
 
+    public ArrayList getDogArrayList() {
+        return dogArrayList;
+    }
+
     public String getName() {
         return name;
     }

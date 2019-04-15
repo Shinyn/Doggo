@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permanents -->
+    <!-- Login, Account, Appname -->
     <string name="app_name">Doggo</string>
     <string name="login">Login</string>
     <string name="create_account">Create Account</string>
@@ -15,12 +15,15 @@
     <string name="add_pet_name">Name</string>
     <string name="add_pet_breed">Breed</string>
     <string name="add_pet_age">Age</string>
-    <string name="add_pet_height">Withers Height</string>
+    <string name="add_pet_height">Height</string>
     <string name="add_pet_weight">Weight</string>
     <string name="add_pet_create_dog">Create Dog</string>
     <string name="add_pet_neutered">Neutered</string>
     <string name="add_pet_male">Male</string>
     <string name="add_pet_female">Female</string>
+    <string name="add_pet_year">years</string>
+    <string name="add_pet_cm">cm</string>
+    <string name="add_pet_kg">kg</string>
 
 
     <!-- For the visually impaired -->
@@ -36,5 +39,13 @@
     <string name="add_pet_drawer">Add dog</string>
     <string name="profile_drawer">Profile</string>
     <string name="sign_out_drawer">Sign out</string>
+
+
+    <!-- ProfileFragment -->
+    <string name="profile_user_name">Username</string>
+    <string name="profile_phone_number">Phone number</string>
+    <string name="profile_description">Description</string>
+    <string name="profile_save_changes">Save Changes</string>
+    <string name="profile_picture">Profile picture</string>
 
 </resources>

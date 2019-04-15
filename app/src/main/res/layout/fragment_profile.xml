@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/profilePictureEdit"
+        android:contentDescription="@string/profile_picture"
         android:background="@color/colorPrimary"
         android:layout_width="0dp"
         android:layout_height="176dp"
@@ -22,31 +23,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Username"
+        android:hint="@string/profile_user_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePictureEdit" />
-
-    <EditText
-        android:id="@+id/descriptionEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="Add description.."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneEdit" />
-
-    <EditText
-        android:id="@+id/mailEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="Email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameEdit" />
 
     <EditText
         android:id="@+id/phoneEdit"
@@ -55,9 +34,20 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:hint="phoneNumber"
+        android:hint="@string/profile_phone_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mailEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameEdit" />
+
+    <EditText
+        android:id="@+id/descriptionEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/profile_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneEdit" />
 
     <Button
         android:id="@+id/saveProfileChanges"
@@ -65,7 +55,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:textColor="@color/white"
-        android:text="Save Changes"
+        android:text="@string/profile_save_changes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

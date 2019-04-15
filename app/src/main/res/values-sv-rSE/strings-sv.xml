@@ -22,6 +22,9 @@
     <string name="add_pet_neutered">Kastrerad</string>
     <string name="add_pet_male">Hane</string>
     <string name="add_pet_female">Hona</string>
+    <string name="add_pet_year">år</string>
+    <string name="add_pet_cm">cm</string>
+    <string name="add_pet_kg">kg</string>
 
 
     <!-- För synskadade -->
@@ -37,5 +40,13 @@
     <string name="add_pet_drawer">Skapa hund</string>
     <string name="profile_drawer">Profil</string>
     <string name="sign_out_drawer">Logga ut</string>
+
+
+    <!-- ProfileFragment -->
+    <string name="profile_user_name">Användarnamn</string>
+    <string name="profile_phone_number">Telefonnummer</string>
+    <string name="profile_description">Beskrivning</string>
+    <string name="profile_save_changes">Spara ändringar</string>
+    <string name="profile_picture">Profilbild</string>
 
 </resources>
