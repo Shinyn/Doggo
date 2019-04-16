@@ -64,10 +64,7 @@ public class ProfileFragment extends Fragment {
 
         //String userNameDisplay = getView().findViewById(R.id.nav_header_username);
 
+        /*------------------------------------------------------------------------------------*/
         // Skriv över den gamla usern med den nya istället för att uppdatera all info i firebase
-    }
-
-    public void updateProfile() {
-
     }
 }

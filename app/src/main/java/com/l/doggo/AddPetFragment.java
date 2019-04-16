@@ -1,6 +1,5 @@
 package com.l.doggo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -27,8 +27,9 @@ public class AddPetFragment extends Fragment {
     boolean genderCheck = true;
     boolean neuteredCheck = false;
     private ArrayList<Dog> dogArrayList = new ArrayList<>();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    // Lägg till dog till firestore
 
-    Intent intent;
     Button createDogBtn;
     RadioGroup radioGroup;
     Dog dog;
@@ -37,8 +38,6 @@ public class AddPetFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_add_pet, container, false);
-
-
     }
 
     @Override
@@ -86,16 +85,13 @@ public class AddPetFragment extends Fragment {
         // Kollar om hunden är kastrerad eller ej
         checkBoxNeutered = getView().findViewById(R.id.checkBoxNeutered);
         neuteredCheck = checkBoxNeutered.isChecked();
-        /*checkBoxNeutered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                /* ^ Gör samma sak som:
                 if (checkBoxNeutered.isChecked()) {
                     neuteredCheck = true;
                 } else {
                     neuteredCheck = false;
                 }
-            }
-        }); */
+                */
 
         // Kollar hane eller hona -> ändra med setGender till true eller false
         radioGroup = getView().findViewById(R.id.radioGroup);      // <-- LÖSNINGEN!!!
@@ -107,17 +103,9 @@ public class AddPetFragment extends Fragment {
             genderCheck = false;
         }
 
-        /*
-        genderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-*/
         // Måste kolla så att alla fält är ifyllda korrekt, är dom det så skapa hund annars error
-        if (!name2.equals("")) { // || !breed.getText().equals("") || !age.getText().equals("")
-               // || !height.getText().equals("") || !weight.getText().equals("")) {
+        if (!name2.equals("") || !breed2.equals("") || !age2.equals("")
+               || !height2.equals("") || !weight2.equals("")) {
 
             // Skapar ny hund
             dog = new Dog(name2, breed2,
@@ -140,7 +128,6 @@ public class AddPetFragment extends Fragment {
                 checkBoxNeutered.toggle();
             }
 
-
         } else {
             Toast.makeText(getActivity(), "You have to fill all fields correctly", Toast.LENGTH_SHORT).show();
         }
@@ -153,9 +140,11 @@ public class AddPetFragment extends Fragment {
     public void printDogArrayList() {
 
         for( Dog dog : dogArrayList) {
-            Log.d("!!!", "Array contain these dogs: " + dog.getName());
+            Log.d("!!!", "Array contain these dogs: " + "Name: " + dog.getName() + ", "
+                    + "Breed: " + dog.getBreed() + ", " + "Age: " + dog.getAge() + ", "
+                    + "Height " + dog.getHeight() + ", " + "Weight " + dog.getWeight() + ", "
+                    + "Neutered " + dog.isNeutered() + ", " + "Male " + dog.isMale());
             // Skriv ut listan som test för o se om dog läggs till
         }
-       // return -1;  // Vill skriva ut ArrayListan men får bara -1..
     }
 }

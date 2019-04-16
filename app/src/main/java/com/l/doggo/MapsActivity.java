@@ -37,6 +37,11 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
     // Här vill vi ändra på usern och deras position, i ProfileFragment skapas den bara, här uppdateras den
     // Firebase listener som lyssnar efter andra användares positioner och sätter ut dom på kartan
     // Bilder läggs till på cloud storage med länk till firestoreDatabase URI
+    // Måste ha ett fragment som visar "motståndarens" profil
+    // Behöver inte använda mig av Serializable då ALLT kan gå via firebase
+
+
+    /*--------------------------------------------------------*/
 
     //Om vi har tillstånd till platsdata så ber vi om gps uppdateringar
     @Override
