@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class ProfileFragment extends Fragment {
 
@@ -18,14 +20,13 @@ public class ProfileFragment extends Fragment {
     Button saveChangesButton;
     ImageView profilePicture;
     UserAccount newUser;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile, container, false);
-
-
 
     }
 
@@ -43,9 +44,6 @@ public class ProfileFragment extends Fragment {
                 saveChanges();
             }
         });
-
-
-
     }
 
     public void saveChanges() {
@@ -54,7 +52,6 @@ public class ProfileFragment extends Fragment {
         profileUserName = getView().findViewById(R.id.userNameEdit);
         profilePhoneNumber = getView().findViewById(R.id.phoneEdit);
         profileDescription = getView().findViewById(R.id.descriptionEdit);
-
 
         String uName = profileUserName.getText().toString();
         int pNumber = Integer.parseInt(profilePhoneNumber.getText().toString());
@@ -67,7 +64,7 @@ public class ProfileFragment extends Fragment {
 
         //String userNameDisplay = getView().findViewById(R.id.nav_header_username);
 
-
+        // Skriv över den gamla usern med den nya istället för att uppdatera all info i firebase
     }
 
     public void updateProfile() {

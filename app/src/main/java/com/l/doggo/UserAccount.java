@@ -1,5 +1,7 @@
 package com.l.doggo;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class UserAccount {
 
     private String userName;
@@ -7,6 +9,7 @@ public class UserAccount {
     //private double longitude;
     //private double latitude;
     private int phoneNumber;
+   // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public UserAccount() {
         this("", "", 0);

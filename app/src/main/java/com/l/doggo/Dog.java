@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class Dog implements Serializable {
 
-    private ArrayList<Dog> dogArrayList = new ArrayList<>();
-
     private String name;
     private String breed;
     private int age;
@@ -23,14 +21,6 @@ public class Dog implements Serializable {
         this.weight = weight;
         this.neutered = neutered;
         this.male = male;
-    }
-
-    public void addDogToArrayList(Dog dog) {
-        dogArrayList.add(dog);
-    }
-
-    public ArrayList getDogArrayList() {
-        return dogArrayList;
     }
 
     public String getName() {

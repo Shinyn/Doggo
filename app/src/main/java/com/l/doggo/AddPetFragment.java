@@ -17,6 +17,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class AddPetFragment extends Fragment {
 
     public EditText name, breed, age, height, weight;
@@ -24,6 +26,7 @@ public class AddPetFragment extends Fragment {
     RadioButton genderButton;
     boolean genderCheck = true;
     boolean neuteredCheck = false;
+    private ArrayList<Dog> dogArrayList = new ArrayList<>();
 
     Intent intent;
     Button createDogBtn;
@@ -54,8 +57,6 @@ public class AddPetFragment extends Fragment {
                     createDog();
                     printDogArrayList();
 
-
-                    Log.d("!!!", "Found: " + dog.getDogArrayList().indexOf(1)); // Vill se om den lägger till hunden i arrayen
                 } catch (NumberFormatException e) {
                     Toast.makeText(getActivity(), "You have to fill all fields correctly", Toast.LENGTH_SHORT).show();
                 }
@@ -84,7 +85,8 @@ public class AddPetFragment extends Fragment {
 
         // Kollar om hunden är kastrerad eller ej
         checkBoxNeutered = getView().findViewById(R.id.checkBoxNeutered);
-        checkBoxNeutered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        neuteredCheck = checkBoxNeutered.isChecked();
+        /*checkBoxNeutered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkBoxNeutered.isChecked()) {
@@ -93,25 +95,29 @@ public class AddPetFragment extends Fragment {
                     neuteredCheck = false;
                 }
             }
-        });
+        }); */
 
         // Kollar hane eller hona -> ändra med setGender till true eller false
         radioGroup = getView().findViewById(R.id.radioGroup);      // <-- LÖSNINGEN!!!
         final int radioId = radioGroup.getCheckedRadioButtonId();  // Detta värde VAR null här = crash
         genderButton = getView().findViewById(radioId);
+        if (radioId == R.id.radioBtnMale) {
+            genderCheck = true;
+        } else if (radioId == R.id.radioBtnFemale) {
+            genderCheck = false;
+        }
+
+        /*
         genderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (radioId == R.id.radioBtnMale) {
-                    genderCheck = true;
-                } else if (radioId == R.id.radioBtnFemale) {
-                    genderCheck = false;
-                }
+
             }
         });
-
+*/
         // Måste kolla så att alla fält är ifyllda korrekt, är dom det så skapa hund annars error
-        if (name != null && breed != null && age != null && height != null && weight != null) {
+        if (!name2.equals("")) { // || !breed.getText().equals("") || !age.getText().equals("")
+               // || !height.getText().equals("") || !weight.getText().equals("")) {
 
             // Skapar ny hund
             dog = new Dog(name2, breed2,
@@ -119,7 +125,8 @@ public class AddPetFragment extends Fragment {
                     neuteredCheck, genderCheck); /* Integer ger NumberFormatException om man inte gör try / catch */
 
             // Lägger till hunden till ArrayListan
-            dog.addDogToArrayList(dog);
+            addDogToArrayList(dog);
+
 
             Toast.makeText(getActivity(), "Dog created", Toast.LENGTH_SHORT).show();
 
@@ -139,13 +146,16 @@ public class AddPetFragment extends Fragment {
         }
     }
 
-    public int printDogArrayList() {
+    public void addDogToArrayList(Dog dog) {
+        dogArrayList.add(dog);
+    }
 
-        for (int i = 0; i < dog.getDogArrayList().size(); i++ ) {
+    public void printDogArrayList() {
 
-            Log.d("!!!", "Array contain these dogs: " + dog.getDogArrayList().indexOf(i));
+        for( Dog dog : dogArrayList) {
+            Log.d("!!!", "Array contain these dogs: " + dog.getName());
             // Skriv ut listan som test för o se om dog läggs till
         }
-        return -1;  // Vill skriva ut ArrayListan men får bara -1..
+       // return -1;  // Vill skriva ut ArrayListan men får bara -1..
     }
 }

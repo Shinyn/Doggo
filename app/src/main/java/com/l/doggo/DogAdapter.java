@@ -1,4 +1,4 @@
-package com.l.doggo;
+/*package com.l.doggo;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,13 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-/*
-public class MyAdapter extends ArrayAdapter {
 
-    private Dog dog;
-    private LayoutInflater inflater;
+import java.util.ArrayList;
 
-    public MyAdapter(Context context, Dog dog) {
+public class DogAdapter extends ArrayAdapter<Dog> {
+
+    private Context myContext;
+    private ArrayList<Dog> dogArrayList = new ArrayList<>();
+
+
+    public DogAdapter(Context context, Dog dog) {
         super(context, -1);
         this.dog = dog;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

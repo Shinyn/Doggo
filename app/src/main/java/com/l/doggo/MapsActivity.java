@@ -26,13 +26,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
     LocationManager locationManager;
     LocationListener locationListener;
     private GoogleMap mMap;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    // Här vill vi ändra på usern och deras position, i ProfileFragment skapas den bara, här uppdateras den
+    // Firebase listener som lyssnar efter andra användares positioner och sätter ut dom på kartan
+    // Bilder läggs till på cloud storage med länk till firestoreDatabase URI
 
     //Om vi har tillstånd till platsdata så ber vi om gps uppdateringar
     @Override
