@@ -18,6 +18,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -57,6 +58,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                             intent = new Intent(CreateAccountActivity.this, HomeActivity.class);
                             intent.putExtra("email", emailView.toString());
                             startActivity(intent);
+
+                            /* Vill sätta användarnamn till den autogenererade strängen google skapar när konto skapas
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest().Builder().setDisplayName(user).build;
+                            */
+
                             Toast.makeText(CreateAccountActivity.this, "YAY!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(CreateAccountActivity.this, "You have to fill all fields correctly", Toast.LENGTH_SHORT).show();

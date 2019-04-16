@@ -1,30 +1,16 @@
 package com.l.doggo;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 public class UserAccount {
 
     private String userName;
     private String description;
-    //private double longitude;
-    //private double latitude;
     private int phoneNumber;
-   // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public UserAccount() {
-        this("", "", 0);
-    }
 
     public UserAccount(String userName, String description, int phoneNumber) {
         this.userName = userName;
         this.description = description;
         this.phoneNumber = phoneNumber;
-        //this.longitude = longitude;
-        //this.latitude = latitude;
-    }
-
-    public void displayPosition() {
-
     }
 
     public String getUserName() {
