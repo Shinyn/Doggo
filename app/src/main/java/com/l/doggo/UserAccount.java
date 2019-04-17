@@ -6,6 +6,7 @@ public class UserAccount {
     private String description;
     private int phoneNumber;
 
+    public UserAccount() {}
 
     public UserAccount(String userName, String description, int phoneNumber) {
         this.userName = userName;

@@ -38,7 +38,9 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
     // Firebase listener som lyssnar efter andra användares positioner och sätter ut dom på kartan
     // Bilder läggs till på cloud storage med länk till firestoreDatabase URI
     // Måste ha ett fragment som visar "motståndarens" profil
-    // Behöver inte använda mig av Serializable då ALLT kan gå via firebase
+    // Behöver INTE använda mig av Serializable då ALLT kan gå via firebase
+    // Kommer behöva spara hundarna i en egen collection så att ALLA kommer åt och kan se dom
+    // Para ihop hundarnas unika ID med ägarnas på firebase
 
 
     /*--------------------------------------------------------*/

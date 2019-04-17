@@ -1,7 +1,6 @@
 package com.l.doggo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Dog implements Serializable {
 
