@@ -16,7 +16,7 @@ public class DogAdapter extends ArrayAdapter<Dog> {
 
     private ArrayList<Dog> dogs; // lista av hundar
     private LayoutInflater inflater;
-    //private Dog dog;
+    private Dog dog;
 
 
 
@@ -40,8 +40,8 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         View dogListItem = inflater.inflate(R.layout.fragment_pets, parent, false);
         //ArrayList<Dog> dogArrayList = new ArrayList<>();
 
-
-        Dog dog = dogs.get(position); //
+        // Behöver vara new dog som hämtas från databasen
+        dog = dogs.get(position); //
         // Kopplar id med alla textView's
         TextView petName = dogListItem.findViewById(R.id.petNameDisplay);
         TextView petBreed = dogListItem.findViewById(R.id.breedDisplay);
@@ -66,9 +66,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         petWeight.setText(weight);
         petNeutered.setText(String.valueOf(neutered));
         petGender.setText(String.valueOf(gender));
-
-        //dogs.add(dog);
-
 
         return dogListItem;
     }
