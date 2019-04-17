@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 
 public class PetsFragment extends Fragment {
 
-    Context context;
-
+    public ArrayList<Dog> dogs;
     public Dog dog;
+    // lista av hundar
+    // Måste skapa listan med hundar OCH lägga till hundar
 
     @Nullable
     @Override
@@ -27,9 +30,12 @@ public class PetsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // inte ny dog utan hämta från firebase?
+        dogs = new ArrayList<>();
+        dogs.add(dog);
 
         ListView dogListView = getView().findViewById(R.id.listView);
-        final DogAdapter dogAdapter = new DogAdapter(getActivity(), dog);
+        final DogAdapter dogAdapter = new DogAdapter(getActivity(), dogs);
         dogListView.setAdapter(dogAdapter);
 
         // Ska skriva ut alla hundar till listviewn

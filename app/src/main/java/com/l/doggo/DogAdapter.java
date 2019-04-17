@@ -14,15 +14,24 @@ import java.util.zip.Inflater;
 
 public class DogAdapter extends ArrayAdapter<Dog> {
 
-    private Dog dog;
+    private ArrayList<Dog> dogs; // lista av hundar
     private LayoutInflater inflater;
+    //private Dog dog;
 
 
 
-    public DogAdapter(Context context, Dog dog) {
+    public DogAdapter(Context context, ArrayList<Dog> dogs) { // ta emot en ista av hundar
         super(context, -1);
-        this.dog = dog;
+        this.dogs = dogs;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    // Svarar på hur lång listan kommer vara
+    @Override
+    public int getCount() {
+        if (dogs == null)
+            return 0;
+        return dogs.size();
     }
 
     @NonNull
@@ -31,6 +40,8 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         View dogListItem = inflater.inflate(R.layout.fragment_pets, parent, false);
         //ArrayList<Dog> dogArrayList = new ArrayList<>();
 
+
+        Dog dog = dogs.get(position); //
         // Kopplar id med alla textView's
         TextView petName = dogListItem.findViewById(R.id.petNameDisplay);
         TextView petBreed = dogListItem.findViewById(R.id.breedDisplay);
@@ -55,6 +66,9 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         petWeight.setText(weight);
         petNeutered.setText(String.valueOf(neutered));
         petGender.setText(String.valueOf(gender));
+
+        //dogs.add(dog);
+
 
         return dogListItem;
     }
