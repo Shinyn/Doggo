@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -27,8 +28,7 @@ public class AddPetFragment extends Fragment {
     boolean genderCheck = true;
     boolean neuteredCheck = false;
     private ArrayList<Dog> dogArrayList = new ArrayList<>();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    // Lägg till dog till firestore
+
 
     Button createDogBtn;
     RadioGroup radioGroup;
@@ -51,7 +51,6 @@ public class AddPetFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                // Problemet här är att nu kan man skapa en hund med enbart ålder, höjd och vikt..
                 try {
                     createDog();
                     printDogArrayList();
@@ -135,6 +134,12 @@ public class AddPetFragment extends Fragment {
 
     public void addDogToArrayList(Dog dog) {
         dogArrayList.add(dog);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // Lägg till hund i database under /dogs/dogOwner/userDogs
+        // Använd userId i dokumentet och skapa en collection som alla får läsa men bara userId får skriva till
+        db.collection("dogs").document(userId).collection("userDogs").add(dog);
+        // Uppdatera listan på firestore
     }
 
     public void printDogArrayList() {

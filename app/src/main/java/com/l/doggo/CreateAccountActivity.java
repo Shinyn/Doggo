@@ -55,16 +55,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             intent = new Intent(CreateAccountActivity.this, HomeActivity.class);
                             intent.putExtra("email", emailView.toString());
                             startActivity(intent);
-
-                            /* Vill sätta användarnamn till den autogenererade strängen google skapar när konto skapas
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest().Builder().setDisplayName(user).build;
-                            */
-
                             Toast.makeText(CreateAccountActivity.this, "YAY!", Toast.LENGTH_SHORT).show();
+
                         } else {
                             Toast.makeText(CreateAccountActivity.this, "You have to fill all fields correctly", Toast.LENGTH_SHORT).show();
                         }

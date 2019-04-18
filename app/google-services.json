@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "791919133708",
-    "firebase_url": "https://doggo-bd03c.firebaseio.com",
-    "project_id": "doggo-bd03c",
-    "storage_bucket": "doggo-bd03c.appspot.com"
+    "project_number": "363080200627",
+    "firebase_url": "https://doggo-fb236.firebaseio.com",
+    "project_id": "doggo-fb236",
+    "storage_bucket": "doggo-fb236.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:791919133708:android:47ce455be3903a79",
+        "mobilesdk_app_id": "1:363080200627:android:47ce455be3903a79",
         "android_client_info": {
           "package_name": "com.l.doggo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "791919133708-qnn2tjan0empdqtqnb3hqscpfqmuefvh.apps.googleusercontent.com",
+          "client_id": "363080200627-20nhj7u18tmu769luuo0ju9i1o37pb33.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.l.doggo",
-            "certificate_hash": "8a501fe0ab1b59b65cf1d56b9a897535d2a67f64"
+            "certificate_hash": "5edaf365fee9e7138b5cad3679bc00e7122c3afc"
           }
         },
         {
-          "client_id": "791919133708-gio0pgmavf5cd9j3t4g236e4s3i50nlb.apps.googleusercontent.com",
+          "client_id": "363080200627-jbjcenpn1hl7hh9dmar1b2l42stahq0g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAe2xrFy2S0sjYGRlg_r9rs7bmuLfDHNlk"
+          "current_key": "AIzaSyAaoEHqX_hQnmUzP2d_RVnMz3MU-8-X1SU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "791919133708-gio0pgmavf5cd9j3t4g236e4s3i50nlb.apps.googleusercontent.com",
+              "client_id": "363080200627-jbjcenpn1hl7hh9dmar1b2l42stahq0g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

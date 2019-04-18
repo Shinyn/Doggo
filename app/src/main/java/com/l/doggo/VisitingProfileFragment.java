@@ -36,6 +36,16 @@ public class VisitingProfileFragment extends Fragment {
     private DocumentReference usersRef = db.collection("users").document(userId);
 
 
+
+
+
+
+
+
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
