@@ -94,7 +94,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                // Denna tar mig till fel view - ProfileFragment istället för VisitinProfileFragment
+                // Denna tar mig till fel view - ProfileFragment istället för VisitingProfileFragment
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new VisitingProfileFragment()).commit();
                 return false;
             }
