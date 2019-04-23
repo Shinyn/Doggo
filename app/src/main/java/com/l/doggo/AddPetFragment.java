@@ -67,6 +67,7 @@ public class AddPetFragment extends Fragment {
         // Kopplar inputen i xml:en till namnen som ska in i Dog konstruktorn
         name = getView().findViewById(R.id.dogName);
         breed = getView().findViewById(R.id.dogBreed);
+
         age = getView().findViewById(R.id.dogAge);
         height = getView().findViewById(R.id.dogHeight);
         weight = getView().findViewById(R.id.dogWeight);
@@ -106,6 +107,8 @@ public class AddPetFragment extends Fragment {
         if (!name2.equals("") || !breed2.equals("") || !age2.equals("")
                || !height2.equals("") || !weight2.equals("")) {
 
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            //FirebaseAuth auth = FirebaseAuth.getInstance().getCurrentUser().getUid();
             // Skapar ny hund
             dog = new Dog(name2, breed2,
                     Integer.parseInt(age2), Integer.parseInt(height2), Integer.parseInt(weight2),
@@ -138,7 +141,9 @@ public class AddPetFragment extends Fragment {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         // Lägg till hund i database under /dogs/dogOwner/userDogs
         // Använd userId i dokumentet och skapa en collection som alla får läsa men bara userId får skriva till
-        db.collection("dogs").document(userId).collection("userDogs").add(dog);
+      //  db.collection("dogs").document(userId).collection("userDogs").add(dog);
+        db.collection("dogs").add(dog);
+
         // Uppdatera listan på firestore
     }
 

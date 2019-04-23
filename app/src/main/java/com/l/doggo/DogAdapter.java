@@ -3,6 +3,7 @@ package com.l.doggo;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class DogAdapter extends ArrayAdapter<Dog> {
     // Svarar på hur lång listan kommer vara
     @Override
     public int getCount() {
+        Log.d("david", "getCount: ");
         if (dogs == null)
             return 0;
         return dogs.size();
@@ -53,6 +55,7 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         }
 
         Dog currentDog = dogs.get(position);
+        Log.d("david", "getView: " + currentDog.getName());
 
         /*View dogListItem = inflater.inflate(R.layout.fragment_pets, parent, false);*/
         //ArrayList<Dog> dogArrayList = new ArrayList<>();
@@ -64,7 +67,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         DocumentReference usersRef = db.collection("dogs").document(userId);
         */
 
-        //Dog dog = dogs.get(position);
 
         // Kopplar id med alla textView's
         TextView petName = listItem.findViewById(R.id.petNameDisplay);
@@ -77,40 +79,27 @@ public class DogAdapter extends ArrayAdapter<Dog> {
 
         petName.setText(currentDog.getName());
         petBreed.setText(currentDog.getBreed());
-        petAge.setText(currentDog.getAge());
-        petHeight.setText(currentDog.getHeight());
-        petWeight.setText(currentDog.getWeight());
-        //petNeutered.setText(currentDog.isNeutered());
-        //petGender.setText(currentDog.isMale());
+        petAge.setText(String.valueOf(currentDog.getAge()));
+        petHeight.setText(String.valueOf(currentDog.getHeight()));
+        petWeight.setText(String.valueOf(currentDog.getWeight()));
+        petNeutered.setText(String.valueOf(currentDog.isNeutered()));
+        petGender.setText(String.valueOf(currentDog.isMale()));
 
 
+        //petName.setText(currentDog.getName());
+
+        if (currentDog.isNeutered()) {
+            petNeutered.setText("yes");
+        } else {
+            petNeutered.setText("No");
+        }
+
+        if (currentDog.isMale()) {
+            petGender.setText("Male");
+        } else {
+            petGender.setText("Female");
+        }
 
         return listItem;
-
-        /*
-        try {
-            String name = dog.getName(); // Crash pga NullPointerException
-            String breed = dog.getBreed();
-            int age = dog.getAge();
-            int height = dog.getHeight();
-            int weight = dog.getWeight();
-            boolean neutered = dog.isNeutered();
-            boolean gender = dog.isMale();
-
-            petName.setText(name);
-            petBreed.setText(breed);
-            petAge.setText(age);
-            petHeight.setText(height);
-            petWeight.setText(weight);
-            petNeutered.setText(String.valueOf(neutered));
-            petGender.setText(String.valueOf(gender));
-
-        } catch (NullPointerException e) {
-            Toast.makeText(getContext(), "Dog is null", Toast.LENGTH_SHORT).show();
-        }
-        */
-
-
     }
-
 }

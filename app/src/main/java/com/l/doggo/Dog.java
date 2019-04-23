@@ -12,6 +12,8 @@ public class Dog implements Serializable {
     private boolean neutered;
     private boolean male;
 
+    public Dog() {}
+
     public Dog(String name, String breed, int age, int height, int weight, boolean neutered, boolean male) {
         this.name = name;
         this.breed = breed;
