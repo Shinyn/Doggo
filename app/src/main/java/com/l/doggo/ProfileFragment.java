@@ -27,14 +27,10 @@ public class ProfileFragment extends Fragment {
     private EditText profileUserName, profilePhoneNumber, profileDescription;
     private Button saveChangesButton;
     private ImageView profilePicture;
-   // private UserAccount newUser;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private DocumentReference usersRef = db.collection("users").document(userId);
-
 
 
     @Nullable

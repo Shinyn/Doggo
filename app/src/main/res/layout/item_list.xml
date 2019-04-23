@@ -65,7 +65,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:hint="Neutered"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/neutered_text_view"
         app:layout_constraintTop_toBottomOf="@+id/dogWeightDisplay" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:hint="Gender"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/gender_text_view"
         app:layout_constraintTop_toBottomOf="@+id/neuteredDisplay" />
 
     <TextView
@@ -86,12 +86,12 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
-        android:text="years"
+        android:text="@string/add_pet_year"
         app:layout_constraintStart_toEndOf="@+id/dogAgeDisplay"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/kg_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dogHeightDisplay" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/cm_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dogAgeDisplay" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/neutered_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -124,15 +124,15 @@
         app:layout_constraintTop_toBottomOf="@+id/dogWeightDisplay" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/gender_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="Gender"
+        android:text="@string/gender"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/neutered_text_view" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -143,5 +143,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/breedDisplay"
         tools:srcCompat="@tools:sample/avatars[2]" />
+
+    <TextView
+        android:id="@+id/owner_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="username goes here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/age_years" />
+
+    <TextView
+        android:id="@+id/phone_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="nr goes here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/owner_text_view" />
 
 </android.support.constraint.ConstraintLayout>

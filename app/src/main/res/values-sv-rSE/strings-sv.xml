@@ -26,6 +26,7 @@
     <string name="add_pet_cm">cm</string>
     <string name="add_pet_kg">kg</string>
 
+    <string name="gender">Kön</string>
 
     <!-- För synskadade -->
     <string name="content_description_paw">Hund tass</string>

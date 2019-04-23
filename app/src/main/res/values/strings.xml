@@ -25,6 +25,7 @@
     <string name="add_pet_cm">cm</string>
     <string name="add_pet_kg">kg</string>
 
+    <string name="gender">Gender</string>
 
     <!-- For the visually impaired -->
     <string name="content_description_paw">Dog paw</string>

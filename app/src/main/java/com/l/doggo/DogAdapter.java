@@ -11,8 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -21,7 +24,6 @@ import java.util.zip.Inflater;
 public class DogAdapter extends ArrayAdapter<Dog> {
 
     private ArrayList<Dog> dogs; // lista av hundar
-    /*private LayoutInflater inflater;*/
     private Context myContext;
 
 
@@ -32,7 +34,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         //this.dogs = dogs;
         dogs = dogsList;
         myContext = context;
-        /*inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);*/
     }
 
     // Svarar på hur lång listan kommer vara
@@ -48,7 +49,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-
         View listItem = convertView;
         if (listItem == null) {
             listItem = LayoutInflater.from(myContext).inflate(R.layout.item_list, parent, false);
@@ -57,10 +57,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         Dog currentDog = dogs.get(position);
         Log.d("david", "getView: " + currentDog.getName());
 
-        /*View dogListItem = inflater.inflate(R.layout.fragment_pets, parent, false);*/
-        //ArrayList<Dog> dogArrayList = new ArrayList<>();
-
-        // Behöver vara new dog som hämtas från databasen??
         /*
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -77,6 +73,9 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         TextView petNeutered = listItem.findViewById(R.id.neuteredDisplay);
         TextView petGender = listItem.findViewById(R.id.dogGenderDisplay);
 
+        TextView petOwner = listItem.findViewById(R.id.owner_text_view);
+        TextView phoneNumber = listItem.findViewById(R.id.phone_text_view);
+
         petName.setText(currentDog.getName());
         petBreed.setText(currentDog.getBreed());
         petAge.setText(String.valueOf(currentDog.getAge()));
@@ -84,6 +83,25 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         petWeight.setText(String.valueOf(currentDog.getWeight()));
         petNeutered.setText(String.valueOf(currentDog.isNeutered()));
         petGender.setText(String.valueOf(currentDog.isMale()));
+
+       // Log.d("david", "onComplete: 1 " + currentDog.getOwner());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(currentDog.getOwner()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                UserAccount owner =  task.getResult().toObject(UserAccount.class);
+                Log.d("david", "onComplete: " + owner.getUserName());
+            }
+        });
+
+
+
+        // HOW?
+        // Get current userName ska in här
+        /*petOwner.setText();*/
+        // phoneNumber ska in här
+        /*phoneNumber.setText();*/
 
 
         //petName.setText(currentDog.getName());

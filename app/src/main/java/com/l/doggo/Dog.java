@@ -6,17 +6,25 @@ public class Dog implements Serializable {
 
     private String name;
     private String breed;
+    private String owner;
+    private String imageUrl; // denna ska va null tills Uri fungerar
+    private int phoneNumber;
     private int age;
     private int height;
     private int weight;
     private boolean neutered;
     private boolean male;
 
+
     public Dog() {}
 
-    public Dog(String name, String breed, int age, int height, int weight, boolean neutered, boolean male) {
+    public Dog(String name, String breed, String owner, String imageUrl,
+               int phoneNumber, int age, int height, int weight, boolean neutered, boolean male) {
         this.name = name;
         this.breed = breed;
+        this.owner = owner;
+        this.imageUrl = imageUrl;
+        this.phoneNumber = phoneNumber;
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -38,6 +46,30 @@ public class Dog implements Serializable {
 
     public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getAge() {
