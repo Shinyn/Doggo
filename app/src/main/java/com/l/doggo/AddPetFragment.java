@@ -18,6 +18,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -56,7 +57,7 @@ public class AddPetFragment extends Fragment {
     RadioGroup radioGroup;
     Dog dog;
 
-    Button addDogImageBtn;
+    ImageButton addDogImageBtn;
     ImageView dogImage;
     Uri imageUri;
     private static final int PIC_IMAGE_REQUEST = 1;
@@ -146,26 +147,16 @@ public class AddPetFragment extends Fragment {
         // Kopplar inputen i xml:en till namnen som ska in i Dog konstruktorn
         name = getView().findViewById(R.id.dogName);
         breed = getView().findViewById(R.id.dogBreed);
-
         age = getView().findViewById(R.id.dogAge);
         height = getView().findViewById(R.id.dogHeight);
         weight = getView().findViewById(R.id.dogWeight);
         checkBoxNeutered = getView().findViewById(R.id.checkBoxNeutered);
+        radioGroup = getView().findViewById(R.id.radioGroup);
 
-        /* Måste lägga till Uri-länk separat sen phoneNr och owner UTAN att det är fält som behöver fyllas i */
-        // Behöver hämta phoneNr och Owner från firebase -.-
-        // Ta den inloggade användarens userID och sätt till owner, behöver inte hämta från firebase med get
-        /*-------------------------------------------------*/
-
+        // Uri
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
-        // Lägg till dog image url här?
-        // Och istället för att img url är null så sätt den till imageUri
-        //---------------------------------------------------------------
 
-
-        // Känns som extrajobb att ta en siffra -> konvertera till String -> konvertera till siffra
-        // Bara för att få in den i Dog klassens konstruktor
         final String name2 = name.getText().toString().trim();
         final String breed2 = breed.getText().toString().trim();
         final String age2 = age.getText().toString().trim();
@@ -185,7 +176,6 @@ public class AddPetFragment extends Fragment {
                 */
 
         // Kollar hane eller hona -> ändra med setGender till true eller false
-        radioGroup = getView().findViewById(R.id.radioGroup);
         final int radioId = radioGroup.getCheckedRadioButtonId();
         genderButton = getView().findViewById(radioId);
         if (radioId == R.id.radioBtnMale) {
@@ -194,7 +184,7 @@ public class AddPetFragment extends Fragment {
             genderCheck = false;
         }
 
-
+        // Sätter hundens ägare och dess telefonnummer
         final String owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference docRef = FirebaseFirestore.getInstance().collection("users").document(owner);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
