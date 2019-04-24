@@ -76,12 +76,6 @@ public class AddPetFragment extends Fragment {
         startActivityForResult(intent, PIC_IMAGE_REQUEST);
     }
 
-    private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = getContext().getContentResolver(); // Kanske är null
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-
     private void uploadFile() {
         if (imageUri != null) {
             final String owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -90,6 +84,8 @@ public class AddPetFragment extends Fragment {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                    String uploadId = databaseReference.push().getKey();
+                    databaseReference.child(uploadId).setValue(dog.getImageUrl());  // Kanske blir fel här
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -135,6 +131,7 @@ public class AddPetFragment extends Fragment {
 
                 try {
                     createDog();
+                    uploadFile();
                     printDogArrayList();
 
                 } catch (NumberFormatException e) {
@@ -212,7 +209,7 @@ public class AddPetFragment extends Fragment {
 
 
                     // Skapar ny hund
-                    dog = new Dog(name2, breed2, owner, null, number,
+                    dog = new Dog(name2, breed2, owner, imageUri.toString(), number,
                             Integer.parseInt(age2), Integer.parseInt(height2), Integer.parseInt(weight2),
                             neuteredCheck, genderCheck); /* Integer ger NumberFormatException om man inte gör try / catch */
 
