@@ -25,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,16 +87,42 @@ public class AddPetFragment extends Fragment {
     private void uploadFile() {
         if (imageUri != null) {
             //final String owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
             + "." + getFileExtension(imageUri));
-            fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fileReference.putFile(imageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    createDog(downloadUri.toString());
+
+                   // String uploadId = databaseReference.push().getKey();
+
+                    //databaseReference.child(uploadId).setValue("david");
+                }
+            })
+
+
+
+             /*       .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                    String url =  taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                     String uploadId = databaseReference.push().getKey();
-                    databaseReference.child(uploadId).setValue(dog.getImageUrl());  // Kanske blir fel här
+
+                    databaseReference.child(uploadId).setValue(url);  // Kanske blir fel här
                 }
-            }).addOnFailureListener(new OnFailureListener() {
+            }) */
+            .addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -119,6 +146,8 @@ public class AddPetFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        storageReference = FirebaseStorage.getInstance().getReference("dog_pics");
+        databaseReference = FirebaseDatabase.getInstance().getReference("dog_pics");
         addDogImageBtn = getView().findViewById(R.id.add_pet_image_button);
         dogImage = getView().findViewById(R.id.addDogPicture);
 
@@ -138,7 +167,7 @@ public class AddPetFragment extends Fragment {
             public void onClick(View v) {
 
                 try {
-                    createDog();
+                   // createDog();
                     uploadFile();
                     printDogArrayList();
 
@@ -149,7 +178,7 @@ public class AddPetFragment extends Fragment {
         });
     }
 
-    public void createDog() {
+    public void createDog(final String downloadUrl ) {
 
         // Kopplar inputen i xml:en till namnen som ska in i Dog konstruktorn
         name = getView().findViewById(R.id.dogName);
@@ -161,8 +190,7 @@ public class AddPetFragment extends Fragment {
         radioGroup = getView().findViewById(R.id.radioGroup);
 
         // Uri
-        storageReference = FirebaseStorage.getInstance().getReference("dog_pics");
-        databaseReference = FirebaseDatabase.getInstance().getReference("dog_pics");
+
 
         final String name2 = name.getText().toString().trim();
         final String breed2 = breed.getText().toString().trim();
@@ -206,7 +234,7 @@ public class AddPetFragment extends Fragment {
 
 
                     // Skapar ny hund
-                    dog = new Dog(name2, breed2, owner, imageUri.toString(), number,
+                    dog = new Dog(name2, breed2, owner, downloadUrl, number,
                             Integer.parseInt(age2), Integer.parseInt(height2), Integer.parseInt(weight2),
                             neuteredCheck, genderCheck); /* Integer ger NumberFormatException om man inte gör try / catch */
 

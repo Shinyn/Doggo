@@ -8,20 +8,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -32,6 +38,8 @@ public class PetsFragment extends Fragment {
     DogAdapter dogAdapter;
     ArrayList<Dog> dogList;
     DatabaseReference databaseReference;
+    //TextView ownerDisplay;
+    //TextView ownerNumber;
 
     @Nullable
     @Override
@@ -43,6 +51,8 @@ public class PetsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //ownerDisplay = getView().findViewById(R.id.owner_text_view);
+        //ownerNumber = getView().findViewById(R.id.phone_text_view);
         /*---------------------------------*/
 
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
@@ -75,12 +85,17 @@ public class PetsFragment extends Fragment {
     public void getDoggos() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        CollectionReference dogCollectionRef = db.collection("dogs");
+        final CollectionReference dogCollectionRef = db.collection("dogs");
         dogCollectionRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                    Dog doog = doc.toObject(Dog.class); // Provade att lägga till textviews.setText(doog.getOwner) osv men de ledde till en crash
+                    Dog doog = doc.toObject(Dog.class);
+                    ImageView petView = getView().findViewById(R.id.pet_image_view);
+                    Glide.with(getActivity()).load(dogCollectionRef.getPath("/imageUrl")).into(petView);
+                    // -Crash-
+                    //ownerDisplay.setText(doog.getOwner());
+                    //ownerNumber.setText(doog.getPhoneNumber());
                     dogList.add(doog);
                     Log.d("david", "onEvent: " + doog.getName());
                 }
