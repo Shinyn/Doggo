@@ -86,7 +86,6 @@ public class AddPetFragment extends Fragment {
 
     private void uploadFile() {
         if (imageUri != null) {
-            //final String owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
             + "." + getFileExtension(imageUri));
             fileReference.putFile(imageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -104,25 +103,8 @@ public class AddPetFragment extends Fragment {
                 public void onComplete(@NonNull Task<Uri> task) {
                     Uri downloadUri = task.getResult();
                     createDog(downloadUri.toString());
-
-                   // String uploadId = databaseReference.push().getKey();
-
-                    //databaseReference.child(uploadId).setValue("david");
                 }
-            })
-
-
-
-             /*       .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    String url =  taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                    String uploadId = databaseReference.push().getKey();
-
-                    databaseReference.child(uploadId).setValue(url);  // Kanske blir fel här
-                }
-            }) */
-            .addOnFailureListener(new OnFailureListener() {
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -158,16 +140,12 @@ public class AddPetFragment extends Fragment {
             }
         });
 
-
-        /*--------------------------------------------------------------*/
-
         createDogBtn = getView().findViewById(R.id.createDogBtn);
         createDogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
-                   // createDog();
                     uploadFile();
                     printDogArrayList();
 
@@ -189,15 +167,11 @@ public class AddPetFragment extends Fragment {
         checkBoxNeutered = getView().findViewById(R.id.checkBoxNeutered);
         radioGroup = getView().findViewById(R.id.radioGroup);
 
-        // Uri
-
-
         final String name2 = name.getText().toString().trim();
         final String breed2 = breed.getText().toString().trim();
         final String age2 = age.getText().toString().trim();
         final String height2 = height.getText().toString().trim();
         final String weight2 = weight.getText().toString().trim();
-
 
         // Kollar om hunden är kastrerad eller ej
         checkBoxNeutered = getView().findViewById(R.id.checkBoxNeutered);
@@ -264,10 +238,6 @@ public class AddPetFragment extends Fragment {
         dogArrayList.add(dog);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("dogs").add(dog);
-        //String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        // Lägg till hund i database under /dogs/dogOwner/userDogs
-        // Använd userId i dokumentet och skapa en collection som alla får läsa men bara userId får skriva till
-        //db.collection("dogs").document(userId).collection("userDogs").add(dog);
     }
 
     public void printDogArrayList() {

@@ -28,9 +28,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
     private ArrayList<Dog> dogs; // lista av hundar
     private Context myContext;
 
-
-
-
     public DogAdapter(Context context, ArrayList<Dog> dogsList) { // ta emot en ista av hundar
         super(context, 0, dogsList);
         //this.dogs = dogs;
@@ -59,13 +56,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         Dog currentDog = dogs.get(position);
         Log.d("david", "getView: " + currentDog.getName());
 
-        /*
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DocumentReference usersRef = db.collection("dogs").document(userId);
-        */
-
-
         // Kopplar id med alla textView's
         TextView petName = listItem.findViewById(R.id.petNameDisplay);
         TextView petBreed = listItem.findViewById(R.id.breedDisplay);
@@ -89,18 +79,21 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         petNeutered.setText(String.valueOf(currentDog.isNeutered()));
         petGender.setText(String.valueOf(currentDog.isMale()));
 
-       // Log.d("david", "onComplete: 1 " + currentDog.getOwner());
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(currentDog.getOwner()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                UserAccount owner =  task.getResult().toObject(UserAccount.class);
-                Log.d("david", "onComplete: " + owner.getUserName());
 
-                // set text in petOwner och
-                phoneNumber.setText(String.valueOf(owner.getPhoneNumber()));
-                petOwner.setText(owner.getUserName());
+                UserAccount owner =  task.getResult().toObject(UserAccount.class);
+                if (owner == null) {
+                    Toast.makeText(getContext(), "Owner is null", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("david", "onComplete: " + owner.getUserName());
+
+                    // set text in petOwner och
+                    phoneNumber.setText(String.valueOf(owner.getPhoneNumber()));
+                    petOwner.setText(owner.getUserName());
+                }
             }
         });
 

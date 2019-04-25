@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,8 +60,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile, container, false);
-
-
     }
 
     /*--------------------------------------------------------------------------------------------*/
@@ -79,14 +79,23 @@ public class ProfileFragment extends Fragment {
 
     private void uploadFile() {
         if (imageUri != null) {
-            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
                     + "." + getFileExtension(imageUri));
-            fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fileReference.putFile(imageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                    String uploadId = databaseReference.push().getKey();
-                    databaseReference.child(uploadId).setValue(newUser.getImageUrl());  // Kanske blir fel här
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    saveChanges(downloadUri.toString());
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -115,10 +124,12 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        storageReference = FirebaseStorage.getInstance().getReference("user_pics");
+        databaseReference = FirebaseDatabase.getInstance().getReference("user_pics");
+
         //--------------------------------------------------
         addProfileImageBtn = getView().findViewById(R.id.add_profile_image_button);
         profilePicture = getView().findViewById(R.id.profilePictureEdit);
-
         addProfileImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,11 +137,6 @@ public class ProfileFragment extends Fragment {
             }
         });
         //--------------------------------------------------
-
-        // Display username, number, description from firebase
-
-
-        //profilePicture = getView().findViewById(R.id.profilePictureEdit);
 
         profileUserName = getView().findViewById(R.id.userNameEdit);
         profilePhoneNumber = getView().findViewById(R.id.phoneEdit);
@@ -141,7 +147,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    saveChanges();
                     uploadFile();
                 } catch (NumberFormatException e) {
                     Toast.makeText(getActivity(), "Invalid phone-number", Toast.LENGTH_SHORT).show();
@@ -150,7 +155,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    public void saveChanges() {
+    public void saveChanges(final String downloadUrl) {
 
         String userName = profileUserName.getText().toString();
         int phoneNumber = Integer.parseInt(profilePhoneNumber.getText().toString());
@@ -160,16 +165,13 @@ public class ProfileFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("profile_pics");
 
         // Skriver över den gamla usern med den nya istället för att uppdatera all info i firebase
-        newUser = new UserAccount(userName, description, phoneNumber, imageUri.toString());
-        /*String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); *///May cause NullPointerException
+        newUser = new UserAccount(userName, description, phoneNumber, downloadUrl);
         if (userId != null) {
             db.collection("users").document(userId).set(newUser);
             Toast.makeText(getActivity(), "Changes Saved", Toast.LENGTH_SHORT).show();
         } else {
             Log.d("!!!", "saveChanges: userId is null");
         }
-
-        //db.collection("users").document(userId).set(newUser);
     }
 
     @Override
@@ -181,14 +183,23 @@ public class ProfileFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     // Loads details from firebase
-                    UserAccount user = task.getResult().toObject(UserAccount.class);
-                    String userName = user.getUserName();
-                    int phoneNumber = user.getPhoneNumber();
-                    String description = user.getDescription();
 
-                    profileUserName.setText(userName);
-                    profilePhoneNumber.setText(String.valueOf(phoneNumber));
-                    profileDescription.setText(description);
+                    UserAccount user = task.getResult().toObject(UserAccount.class);
+                    if (user == null) {
+                        Toast.makeText(getActivity(), "no user found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String userName = user.getUserName(); //VARFÖR ÄR DEN HÄR NULL NU!?
+                        int phoneNumber = user.getPhoneNumber();
+                        String description = user.getDescription();
+
+                        //Crashar appen pga null
+                        //Glide.with(getContext()).load(newUser.getImageUrl()).into(profilePicture);
+                        //ImageView navImage = getView().findViewById(R.id.nav_header_image);
+                        //Glide.with(getContext()).load()
+                        profileUserName.setText(userName);
+                        profilePhoneNumber.setText(String.valueOf(phoneNumber));
+                        profileDescription.setText(description);
+                    }
                 }
             }
         });

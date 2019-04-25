@@ -39,8 +39,6 @@ public class PetsFragment extends Fragment {
     DogAdapter dogAdapter;
     ArrayList<Dog> dogList;
     DatabaseReference databaseReference;
-    //TextView ownerDisplay;
-    //TextView ownerNumber;
 
     @Nullable
     @Override
@@ -52,17 +50,13 @@ public class PetsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //ownerDisplay = getView().findViewById(R.id.owner_text_view);
-        //ownerNumber = getView().findViewById(R.id.phone_text_view);
-        /*---------------------------------*/
-
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Dog dog = postSnapshot.getValue(Dog.class);
-                    dogList.add(dog); // Får aldrig access hit
+                    dogList.add(dog); // Får aldrig access hit.. men det verkar inte behövas? :S
                     Log.d("###", "onDataChange: Started");
                 }
             }
@@ -92,24 +86,11 @@ public class PetsFragment extends Fragment {
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                     Dog doog = doc.toObject(Dog.class);
-
-                    // -Crash-
-                    //ownerDisplay.setText(doog.getOwner());
-                    //ownerNumber.setText(doog.getPhoneNumber());
                     dogList.add(doog);
                     Log.d("david", "onEvent: " + doog.getName());
                 }
                 dogAdapter.notifyDataSetChanged();
             }
         });
-
-        //final DocumentReference dogUriRef = db.collection("dogs").document("imageUrl");
-        /* dogUriRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                ImageView petView = getView().findViewById(R.id.pet_image_view);
-                Glide.with(getActivity()).load().into(petView);
-            }
-        });*/
     }
 }

@@ -13,6 +13,7 @@ public class UserAccount {
         this.userName = userName;
         this.description = description;
         this.phoneNumber = phoneNumber;
+        this.imageUrl = imageUrl;
     }
 
     public String getImageUrl() {
