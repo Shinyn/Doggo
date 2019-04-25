@@ -77,10 +77,17 @@ public class AddPetFragment extends Fragment {
         startActivityForResult(intent, PIC_IMAGE_REQUEST);
     }
 
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContext().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
     private void uploadFile() {
         if (imageUri != null) {
-            final String owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            StorageReference fileReference = storageReference.child(owner);
+            //final String owner = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+            + "." + getFileExtension(imageUri));
             fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -154,8 +161,8 @@ public class AddPetFragment extends Fragment {
         radioGroup = getView().findViewById(R.id.radioGroup);
 
         // Uri
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
-        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
+        storageReference = FirebaseStorage.getInstance().getReference("dog_pics");
+        databaseReference = FirebaseDatabase.getInstance().getReference("dog_pics");
 
         final String name2 = name.getText().toString().trim();
         final String breed2 = breed.getText().toString().trim();

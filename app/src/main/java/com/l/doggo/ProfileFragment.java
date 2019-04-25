@@ -1,5 +1,9 @@
 package com.l.doggo;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,18 +12,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 public class ProfileFragment extends Fragment {
@@ -32,6 +45,14 @@ public class ProfileFragment extends Fragment {
     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private DocumentReference usersRef = db.collection("users").document(userId);
 
+    //------------------------------------------------//
+    Uri imageUri;
+    ImageButton addProfileImageBtn;
+    private static final int PIC_IMAGE_REQUEST = 1;
+    StorageReference storageReference;
+    DatabaseReference databaseReference;
+    UserAccount newUser;
+    //------------------------------------------------//
 
     @Nullable
     @Override
@@ -41,14 +62,75 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    /*--------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------*/
+    public void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PIC_IMAGE_REQUEST);
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContext().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void uploadFile() {
+        if (imageUri != null) {
+            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+                    + "." + getFileExtension(imageUri));
+            fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                    String uploadId = databaseReference.push().getKey();
+                    databaseReference.child(uploadId).setValue(newUser.getImageUrl());  // Kanske blir fel här
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PIC_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
+                && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            profilePicture.setImageURI(imageUri);
+        }
+    }
+
+    /*--------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------*/
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //--------------------------------------------------
+        addProfileImageBtn = getView().findViewById(R.id.add_profile_image_button);
+        profilePicture = getView().findViewById(R.id.profilePictureEdit);
+
+        addProfileImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
+        //--------------------------------------------------
+
         // Display username, number, description from firebase
 
 
-        profilePicture = getView().findViewById(R.id.profilePictureEdit);
+        //profilePicture = getView().findViewById(R.id.profilePictureEdit);
 
         profileUserName = getView().findViewById(R.id.userNameEdit);
         profilePhoneNumber = getView().findViewById(R.id.phoneEdit);
@@ -60,6 +142,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     saveChanges();
+                    uploadFile();
                 } catch (NumberFormatException e) {
                     Toast.makeText(getActivity(), "Invalid phone-number", Toast.LENGTH_SHORT).show();
                 }
@@ -73,8 +156,11 @@ public class ProfileFragment extends Fragment {
         int phoneNumber = Integer.parseInt(profilePhoneNumber.getText().toString());
         String description = profileDescription.getText().toString();
 
+        storageReference = FirebaseStorage.getInstance().getReference("profile_pics");
+        databaseReference = FirebaseDatabase.getInstance().getReference("profile_pics");
+
         // Skriver över den gamla usern med den nya istället för att uppdatera all info i firebase
-        UserAccount newUser = new UserAccount(userName, description, phoneNumber);
+        newUser = new UserAccount(userName, description, phoneNumber, imageUri.toString());
         /*String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); *///May cause NullPointerException
         if (userId != null) {
             db.collection("users").document(userId).set(newUser);

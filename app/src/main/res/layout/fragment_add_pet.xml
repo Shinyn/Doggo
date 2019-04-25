@@ -9,6 +9,8 @@
 
     <ImageView
         android:id="@+id/addDogPicture"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="176dp"
@@ -156,7 +158,6 @@
         android:id="@+id/add_pet_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="136dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
