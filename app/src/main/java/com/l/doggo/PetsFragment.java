@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -91,8 +92,7 @@ public class PetsFragment extends Fragment {
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                     Dog doog = doc.toObject(Dog.class);
-                    ImageView petView = getView().findViewById(R.id.pet_image_view);
-                    Glide.with(getActivity()).load(dogCollectionRef.getPath("/imageUrl")).into(petView);
+
                     // -Crash-
                     //ownerDisplay.setText(doog.getOwner());
                     //ownerNumber.setText(doog.getPhoneNumber());
@@ -102,5 +102,14 @@ public class PetsFragment extends Fragment {
                 dogAdapter.notifyDataSetChanged();
             }
         });
+
+        //final DocumentReference dogUriRef = db.collection("dogs").document("imageUrl");
+        /* dogUriRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                ImageView petView = getView().findViewById(R.id.pet_image_view);
+                Glide.with(getActivity()).load().into(petView);
+            }
+        });*/
     }
 }

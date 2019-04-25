@@ -7,6 +7,8 @@
 
     <TextView
         android:id="@+id/petNameDisplay"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -139,9 +141,11 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@color/colorAccent"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/breedDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/petNameDisplay"
         tools:srcCompat="@tools:sample/avatars[2]" />
 
     <TextView
@@ -151,9 +155,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="username goes here"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/age_years" />
+        app:layout_constraintTop_toBottomOf="@+id/ownerText" />
 
     <TextView
         android:id="@+id/phone_text_view"
@@ -162,7 +165,31 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="nr goes here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneText" />
+
+    <TextView
+        android:id="@+id/ownerText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/owner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/age_years" />
+
+    <TextView
+        android:id="@+id/phoneText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/phone_nr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/owner_text_view" />
 

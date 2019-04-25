@@ -19,14 +19,26 @@
     <string name="add_pet_height">Mankhöjd</string>
     <string name="add_pet_weight">Vikt</string>
     <string name="add_pet_create_dog">Skapa Hund</string>
-    <string name="add_pet_neutered">Kastrerad</string>
+    <string name="add_pet_neutered">Kastrerad:</string>
     <string name="add_pet_male">Hane</string>
     <string name="add_pet_female">Hona</string>
     <string name="add_pet_year">år</string>
     <string name="add_pet_cm">cm</string>
     <string name="add_pet_kg">kg</string>
 
-    <string name="gender">Kön</string>
+    <string name="gender">Kön:</string>
+
+    <!-- item_list -->
+    <string name="owner">Ägare:</string>
+    <string name="phone_nr">Tel Nr:</string>
+
+
+    <!-- DogAdapter -->
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+    <string name="male">Hane</string>
+    <string name="female">Hona</string>
+
 
     <!-- För synskadade -->
     <string name="content_description_paw">Hund tass</string>

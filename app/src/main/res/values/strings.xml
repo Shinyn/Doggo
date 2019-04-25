@@ -18,14 +18,25 @@
     <string name="add_pet_height">Height</string>
     <string name="add_pet_weight">Weight</string>
     <string name="add_pet_create_dog">Create Dog</string>
-    <string name="add_pet_neutered">Neutered</string>
+    <string name="add_pet_neutered">Neutered:</string>
     <string name="add_pet_male">Male</string>
     <string name="add_pet_female">Female</string>
     <string name="add_pet_year">years</string>
     <string name="add_pet_cm">cm</string>
     <string name="add_pet_kg">kg</string>
 
-    <string name="gender">Gender</string>
+    <string name="gender">Gender:</string>
+
+    <!-- item_list -->
+    <string name="owner">Owner:</string>
+    <string name="phone_nr">Phone Nr:</string>
+
+
+    <!-- DogAdapter -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
     <!-- For the visually impaired -->
     <string name="content_description_paw">Dog paw</string>

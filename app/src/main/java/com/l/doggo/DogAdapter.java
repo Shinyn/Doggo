@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,8 +75,11 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         TextView petNeutered = listItem.findViewById(R.id.neuteredDisplay);
         TextView petGender = listItem.findViewById(R.id.dogGenderDisplay);
 
-        TextView petOwner = listItem.findViewById(R.id.owner_text_view);
-        TextView phoneNumber = listItem.findViewById(R.id.phone_text_view);
+        final TextView petOwner = listItem.findViewById(R.id.owner_text_view);
+        final TextView phoneNumber = listItem.findViewById(R.id.phone_text_view);
+        ImageView petView = listItem.findViewById(R.id.pet_image_view);
+
+        Glide.with(myContext).load(currentDog.getImageUrl()).into(petView );
 
         petName.setText(currentDog.getName());
         petBreed.setText(currentDog.getBreed());
@@ -92,30 +97,24 @@ public class DogAdapter extends ArrayAdapter<Dog> {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 UserAccount owner =  task.getResult().toObject(UserAccount.class);
                 Log.d("david", "onComplete: " + owner.getUserName());
+
+                // set text in petOwner och
+                phoneNumber.setText(String.valueOf(owner.getPhoneNumber()));
+                petOwner.setText(owner.getUserName());
             }
         });
 
 
-
-        // HOW?
-        // Get current userName ska in här
-        /*petOwner.setText();*/
-        // phoneNumber ska in här
-        /*phoneNumber.setText();*/
-
-
-        //petName.setText(currentDog.getName());
-
         if (currentDog.isNeutered()) {
-            petNeutered.setText("yes");
+            petNeutered.setText(R.string.yes);
         } else {
-            petNeutered.setText("No");
+            petNeutered.setText(R.string.no);
         }
 
         if (currentDog.isMale()) {
-            petGender.setText("Male");
+            petGender.setText(R.string.male);
         } else {
-            petGender.setText("Female");
+            petGender.setText(R.string.female);
         }
 
         return listItem;
