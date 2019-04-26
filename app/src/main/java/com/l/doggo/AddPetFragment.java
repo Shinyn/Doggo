@@ -169,9 +169,9 @@ public class AddPetFragment extends Fragment {
 
         final String name2 = name.getText().toString().trim();
         final String breed2 = breed.getText().toString().trim();
-        final String age2 = age.getText().toString().trim();
-        final String height2 = height.getText().toString().trim();
-        final String weight2 = weight.getText().toString().trim();
+        final String age2 = age.getText().toString();
+        final String height2 = height.getText().toString();
+        final String weight2 = weight.getText().toString();
 
         // Kollar om hunden är kastrerad eller ej
         checkBoxNeutered = getView().findViewById(R.id.checkBoxNeutered);

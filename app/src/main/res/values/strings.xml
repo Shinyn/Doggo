@@ -47,7 +47,7 @@
 
     <!-- Drawer menu -->
     <string name="map_drawer">Map</string>
-    <string name="pets_drawer">My dogs</string>
+    <string name="pets_drawer">Dogs</string>
     <string name="add_pet_drawer">Add dog</string>
     <string name="profile_drawer">Profile</string>
     <string name="sign_out_drawer">Sign out</string>

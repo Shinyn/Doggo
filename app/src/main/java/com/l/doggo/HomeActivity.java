@@ -47,8 +47,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
-            navigationView.setCheckedItem(R.id.nav_mapMenu);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_profileMenu); // Dessa två ändrades från map till profil "for display purposes"
         }
 
         //
@@ -70,9 +70,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_mapMenu:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
-                break;
+            //case R.id.nav_mapMenu:
+              //  getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsActivity()).commit();
+                //break;
             case R.id.nav_petsMenu:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PetsFragment()).commit();
                 break;

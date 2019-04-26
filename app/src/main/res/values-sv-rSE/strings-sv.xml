@@ -49,7 +49,7 @@
 
     <!-- Drawer menyn -->
     <string name="map_drawer">Karta</string>
-    <string name="pets_drawer">Mina hundar</string>
+    <string name="pets_drawer">Hundar</string>
     <string name="add_pet_drawer">Skapa hund</string>
     <string name="profile_drawer">Profil</string>
     <string name="sign_out_drawer">Logga ut</string>

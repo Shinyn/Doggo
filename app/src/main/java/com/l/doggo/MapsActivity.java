@@ -1,4 +1,4 @@
-package com.l.doggo;
+/*package com.l.doggo;
 
 import android.Manifest;
 import android.content.Context;
@@ -44,7 +44,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
     // Para ihop hundarnas unika ID med ägarnas på firebase
 
 
-    /*--------------------------------------------------------*/
+    /*--------------------------------------------------------
 
     //Om vi har tillstånd till platsdata så ber vi om gps uppdateringar
     @Override
@@ -83,11 +83,11 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+    //@Override
+    //public void onMapReady(GoogleMap googleMap) {
+      //  mMap = googleMap;
 
-        /*-------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------
 
         // Sätter en OnClickListener på kartans markör som byter fragment till VisitingProfile
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -100,7 +100,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        /*-------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------
 
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -167,3 +167,4 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         }
     }
 }
+*/
