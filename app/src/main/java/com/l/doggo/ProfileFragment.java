@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment {
     public void saveChanges(final String downloadUrl) {
 
         String userName = profileUserName.getText().toString();
-        int phoneNumber = Integer.parseInt(profilePhoneNumber.getText().toString());
+        String phoneNumber = profilePhoneNumber.getText().toString();
         String description = profileDescription.getText().toString();
 
         storageReference = FirebaseStorage.getInstance().getReference("profile_pics");
@@ -189,7 +189,7 @@ public class ProfileFragment extends Fragment {
                         Toast.makeText(getActivity(), "no user found", Toast.LENGTH_SHORT).show();
                     } else {
                         String userName = user.getUserName(); //VARFÖR ÄR DEN HÄR NULL NU!?
-                        int phoneNumber = user.getPhoneNumber();
+                        String phoneNumber = user.getPhoneNumber();
                         String description = user.getDescription();
 
                         //Crashar appen pga null

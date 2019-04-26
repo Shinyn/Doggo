@@ -52,7 +52,7 @@ public class AddPetFragment extends Fragment {
     boolean genderCheck = true;
     boolean neuteredCheck = false;
     private ArrayList<Dog> dogArrayList = new ArrayList<>();
-    int number;
+    String number;
 
     Button createDogBtn;
     RadioGroup radioGroup;
@@ -199,7 +199,7 @@ public class AddPetFragment extends Fragment {
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                number = task.getResult().getDouble( "phoneNumber").intValue();
+                number = task.getResult().getString( "phoneNumber");
 
 
                 // Måste kolla så att alla fält är ifyllda korrekt, är dom det så skapa hund annars error

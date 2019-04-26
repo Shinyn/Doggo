@@ -4,12 +4,12 @@ public class UserAccount {
 
     private String userName;
     private String description;
-    private int phoneNumber;
+    private String phoneNumber;
     private String imageUrl;
 
     public UserAccount() {}
 
-    public UserAccount(String userName, String description, int phoneNumber, String imageUrl) {
+    public UserAccount(String userName, String description, String phoneNumber, String imageUrl) {
         this.userName = userName;
         this.description = description;
         this.phoneNumber = phoneNumber;
@@ -40,11 +40,11 @@ public class UserAccount {
         this.description = description;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

@@ -8,7 +8,7 @@ public class Dog implements Serializable {
     private String breed;
     private String owner;
     private String imageUrl; // denna ska va null tills Uri fungerar
-    private int phoneNumber;
+    private String phoneNumber;
     private int age;
     private int height;
     private int weight;
@@ -19,7 +19,7 @@ public class Dog implements Serializable {
     public Dog() {}
 
     public Dog(String name, String breed, String owner, String imageUrl,
-               int phoneNumber, int age, int height, int weight, boolean neutered, boolean male) {
+               String phoneNumber, int age, int height, int weight, boolean neutered, boolean male) {
         this.name = name;
         this.breed = breed;
         this.owner = owner;
@@ -64,11 +64,11 @@ public class Dog implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
