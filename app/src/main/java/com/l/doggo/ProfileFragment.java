@@ -37,6 +37,20 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
+//1 ladda ner profiluppgifter
+//2 fyll i profil uppgifter
+
+//camera tryck:
+// sätt bild till imageview
+
+
+// spara-knapp:
+// 1.ladda upp bilden till firestore
+// 2. få tag på länken till bilden på firestore
+// 3 skapa en ny användare-objekt
+// 4. ersätt användare i firestore med det nya objektet
+
+
 public class ProfileFragment extends Fragment {
 
     private EditText profileUserName, profilePhoneNumber, profileDescription;
@@ -55,6 +69,7 @@ public class ProfileFragment extends Fragment {
     DatabaseReference databaseReference;
     UserAccount newUser;
     //------------------------------------------------//
+    // Set onClick på saveChanges, ladda ner currentUser och ta bild från den i onStart
 
     @Nullable
     @Override
@@ -94,8 +109,8 @@ public class ProfileFragment extends Fragment {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    Uri downloadUri = task.getResult();
-                    saveChanges(downloadUri.toString());
+                    imageUri = task.getResult();
+                    saveChanges(imageUri.toString());
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -113,7 +128,14 @@ public class ProfileFragment extends Fragment {
         if (requestCode == PIC_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
                 && data != null && data.getData() != null) {
             imageUri = data.getData();
-            profilePicture.setImageURI(imageUri);
+            if (profilePicture != null) {
+                profilePicture.setImageURI(imageUri);
+                Log.d("!!!!", "onActivityResult: Started and found picture in database");
+            } else {
+                Log.d("!!!!", "onActivityResult: Started without picture found");
+                Toast.makeText(getActivity(), "No picture available", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
@@ -129,7 +151,7 @@ public class ProfileFragment extends Fragment {
 
         //--------------------------------------------------
         addProfileImageBtn = getView().findViewById(R.id.add_profile_image_button);
-        profilePicture = getView().findViewById(R.id.profilePictureEdit);
+        //profilePicture = getView().findViewById(R.id.profilePictureEdit);
         addProfileImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +169,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+                    // Sätt imageUri till nåt
+                    saveChanges(null); // Hur gör man med uri?
                     uploadFile();
                 } catch (NumberFormatException e) {
                     Toast.makeText(getActivity(), "Invalid phone-number", Toast.LENGTH_SHORT).show();
@@ -166,9 +190,14 @@ public class ProfileFragment extends Fragment {
 
         // Skriver över den gamla usern med den nya istället för att uppdatera all info i firebase
         newUser = new UserAccount(userName, description, phoneNumber, downloadUrl);
-        if (userId != null) {
-            db.collection("users").document(userId).set(newUser);
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("!!!", "saveChanges: write");
+
+        if (currentUserId != null) {
+            db.collection("users").document(currentUserId).set(newUser);
             Toast.makeText(getActivity(), "Changes Saved", Toast.LENGTH_SHORT).show();
+            Log.d("!!!", "saveChanges: write success");
+
         } else {
             Log.d("!!!", "saveChanges: userId is null");
         }
@@ -177,7 +206,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        Log.d("!!!!", "onStart: Started");
         usersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -188,12 +217,17 @@ public class ProfileFragment extends Fragment {
                     if (user == null) {
                         Toast.makeText(getActivity(), "no user found", Toast.LENGTH_SHORT).show();
                     } else {
-                        String userName = user.getUserName(); //VARFÖR ÄR DEN HÄR NULL NU!?
+                        String userName = user.getUserName();
                         String phoneNumber = user.getPhoneNumber();
                         String description = user.getDescription();
 
                         //Crashar appen pga null
-                        //Glide.with(getContext()).load(newUser.getImageUrl()).into(profilePicture);
+                        profilePicture = getView().findViewById(R.id.profilePictureEdit);
+                        Log.d("!!!!", "onComplete: Started");
+
+                        if (profilePicture.getDrawable() == null) {
+                            Glide.with(getContext()).load(user.getImageUrl()).into(profilePicture);
+                        }
                         //ImageView navImage = getView().findViewById(R.id.nav_header_image);
                         //Glide.with(getContext()).load()
                         profileUserName.setText(userName);

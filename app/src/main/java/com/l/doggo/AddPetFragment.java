@@ -204,7 +204,7 @@ public class AddPetFragment extends Fragment {
 
                 // Måste kolla så att alla fält är ifyllda korrekt, är dom det så skapa hund annars error
                 if (!name2.equals("") || !breed2.equals("") || !age2.equals("")
-                        || !height2.equals("") || !weight2.equals("")) {
+                        || !height2.equals("") || !weight2.equals("") || number != null && imageUri != null) {
 
 
                     // Skapar ny hund
